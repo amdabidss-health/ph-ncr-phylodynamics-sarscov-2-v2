@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH --job-name=ncrBdsirPrior
+#SBATCH --output=%x-%j.out 
+
+#SBATCH --partition=batch
+#SBATCH --nodes=1
+#SBATCH --qos=240c-1h_batch
+#SBATCH --cpus-per-task=5
+
+#SBATCH --mail-user=icborda@up.edu.ph
+#SBATCH --mail-type=END 
+
+echo "SLURM_JOBID        : $SLURM_JOBID"
+echo "SLURM_JOB_NODELIST : $SLURM_JOB_NODELIST"
+echo "SLURM_NNODES       : $SLURM_NNODES"
+echo "SLURMTMPDIR        : $SLURMTMPDIR"
+echo "working directory  : $SLURM_SUBMIT_DIR"
+
+##load module 
+module load beast/2.6.6  
+module load beagle/3.1.2
+
+# Set stack size to unlimited 
+ulimit -s unlimited
+
+#run beast 
+srun beast -threads $SLURM_CPUS_PER_TASK -seed 1660576333884 -beagle_SSE ncr-new-relaxedClean-bdsir-prior.xml

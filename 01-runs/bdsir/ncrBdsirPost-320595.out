@@ -1,0 +1,195 @@
+SLURM_JOBID        : 320595
+SLURM_JOB_NODELIST : saliksik-cpu-01
+SLURM_NNODES       : 1
+SLURMTMPDIR        : 
+working directory  : /scratch3/imari.borda/ncr-75/bdsir
+>> beast/2.6.6 has been loaded.
+>> java/1.8.0 has been loaded.
+>> beagle/3.1.2 has been loaded.
+
+                        BEAST v2.6.6, 2002-2021
+             Bayesian Evolutionary Analysis Sampling Trees
+                       Designed and developed by
+ Remco Bouckaert, Alexei J. Drummond, Andrew Rambaut & Marc A. Suchard
+                                    
+                   Centre for Computational Evolution
+                         University of Auckland
+                       r.bouckaert@auckland.ac.nz
+                        alexei@cs.auckland.ac.nz
+                                    
+                   Institute of Evolutionary Biology
+                        University of Edinburgh
+                           a.rambaut@ed.ac.uk
+                                    
+                    David Geffen School of Medicine
+                 University of California, Los Angeles
+                           msuchard@ucla.edu
+                                    
+                      Downloads, Help & Resources:
+                           http://beast2.org/
+                                    
+  Source code distributed under the GNU Lesser General Public License:
+                   http://github.com/CompEvol/beast2
+                                    
+                           BEAST developers:
+   Alex Alekseyenko, Trevor Bedford, Erik Bloomquist, Joseph Heled, 
+ Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li, 
+Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel, 
+          Oliver Pybus, Tim Vaughan, Chieh-Hsi Wu, Walter Xie
+                                    
+                               Thanks to:
+          Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Random number seed: 1660571421736
+
+File: ncr-new-relaxedClean-bdsir-post.xml seed: 1660571421736 threads: 5
+Loading package BDMM v1.0
+Loading package MultiTypeTree v7.0.2
+Loading package BEAST v2.6.6
+Loading package MASTER v6.1.2
+Loading package BEAST_CLASSIC v1.5.0
+Loading package BDSKY v1.4.7
+Loading package phylodynamics v1.3.0
+Loading package BEASTLabs v1.9.7
+Loading package skylinetools v0.2.0
+Loading package BEAST v2.6.6
+Alignment(relaxedCleanAlignTrimmed)
+  75 taxa
+  29690 sites
+  548 patterns
+
+Using format 'yyyy-MM-dd' to parse '2020-03-26' as: 2020.2322404371585
+Using format 'yyyy-MM-dd' to parse '2020-03-28' as: 2020.2377049180327
+Using format 'yyyy-MM-dd' to parse '2020-03-13' as: 2020.1967213114754
+Using format 'yyyy-MM-dd' to parse '2020-03-19' as: 2020.2131147540983
+Using format 'yyyy-MM-dd' to parse '2020-03-13' as: 2020.1967213114754
+Using format 'yyyy-MM-dd' to parse '2020-06-23' as: 2020.4754098360656
+Using format 'yyyy-MM-dd' to parse '2020-06-22' as: 2020.4726775956285
+Using format 'yyyy-MM-dd' to parse '2020-04-03' as: 2020.2540983606557
+Using format 'yyyy-MM-dd' to parse '2020-04-09' as: 2020.2704918032787
+Using format 'yyyy-MM-dd' to parse '2020-03-14' as: 2020.1994535519125
+(more warnings visible with loglevel=debug )...
+MT919768 = 2020-04-03 (0.3142076502733744)
+MT919769 = 2020-06-25 (0.08743169398917416)
+MT919770 = 2020-06-26 (0.084699453552048)
+MT919771 = 2020-06-29 (0.07650273224044213)
+MT919772 = 2020-06-29 (0.07650273224044213)
+MT919773 = 2020-06-29 (0.07650273224044213)
+MT919774 = 2020-06-29 (0.07650273224044213)
+MT919775 = 2020-07-06 (0.057377049180331596)
+MT919776 = 2020-07-06 (0.057377049180331596)
+MT919777 = 2020-07-06 (0.057377049180331596)
+65 more...
+Filter 1-5938
+75 taxa
+5938 sites
+110 patterns
+  Using BEAGLE version: 3.2.0 (PRE-RELEASE) resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  Ignoring character uncertainty in tree likelihood.
+  With 110 unique site patterns.
+  Using rescaling scheme : dynamic
+Filter 5939-11876
+75 taxa
+5938 sites
+182 patterns
+  Using BEAGLE version: 3.2.0 (PRE-RELEASE) resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  Ignoring character uncertainty in tree likelihood.
+  With 182 unique site patterns.
+  Using rescaling scheme : dynamic
+Filter 11877-17814
+75 taxa
+5938 sites
+59 patterns
+  Using BEAGLE version: 3.2.0 (PRE-RELEASE) resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  Ignoring character uncertainty in tree likelihood.
+  With 59 unique site patterns.
+  Using rescaling scheme : dynamic
+Filter 17815-23752
+75 taxa
+5938 sites
+174 patterns
+  Using BEAGLE version: 3.2.0 (PRE-RELEASE) resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  Ignoring character uncertainty in tree likelihood.
+  With 174 unique site patterns.
+  Using rescaling scheme : dynamic
+Filter 23753-29690
+75 taxa
+5938 sites
+114 patterns
+  Using BEAGLE version: 3.2.0 (PRE-RELEASE) resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  Ignoring character uncertainty in tree likelihood.
+  With 114 unique site patterns.
+  Using rescaling scheme : dynamic
+===============================================================================
+Citations for this model:
+
+Bouckaert, Remco, Timothy G. Vaughan, Jo?lle Barido-Sottani, Sebasti?n Duch?ne, Mathieu Fourment, 
+Alexandra Gavryushkina, Joseph Heled, Graham Jones, Denise K?hnert, Nicola De Maio, Michael Matschiner, 
+F?bio K. Mendes, Nicola F. M?ller, Huw A. Ogilvie, Louis du Plessis, Alex Popinga, Andrew Rambaut, 
+David Rasmussen, Igor Siveroni, Marc A. Suchard, Chieh-Hsi Wu, Dong Xie, Chi Zhang, Tanja Stadler, 
+Alexei J. Drummond 
+  BEAST 2.5: An advanced software platform for Bayesian evolutionary analysis. 
+  PLoS computational biology 15, no. 4 (2019): e1006650.
+
+Simultaneous reconstruction of evolutionary history and epidemiological dynamics from viral sequences with the birth?death SIR model. Denise Kuehnert, Tanja Stadler, Timothy Vaughan, and Alexei Drummond, J. R. Soc. Interface, 11:20131106 (2014). 
+
+Hasegawa M, Kishino H, Yano T (1985) Dating the human-ape splitting by a
+  molecular clock of mitochondrial DNA. Journal of Molecular Evolution
+  22:160-174.
+
+===============================================================================
+Start likelihood: -Infinity after 1000 initialisation attempts
+P(posterior) = -Infinity (was -Infinity)
+	P(prior) = -Infinity (was -Infinity)
+		P(BDSIRserial.t:relaxedCleanAlignTrimmed) = -Infinity (was -Infinity)
+		P(S0_priorEs.t:relaxedCleanAlignTrimmed) = -16.028803088166 (was -16.028803088166)
+		P(becomeUninfectiousRatePriorEs.t:relaxedCleanAlignTrimmed) = -13.586482894324563 (was -13.586482894324563)
+		P(ClockPrior.c:relaxedCleanAlignTrimmed) = 0.0 (was 0.0)
+		P(FrequenciesPrior.s:relaxedCleanAlignTrimmed) = 0.0 (was 0.0)
+		P(GammaShapePrior.s:relaxedCleanAlignTrimmed) = -1.0 (was -1.0)
+		P(KappaPrior.s:relaxedCleanAlignTrimmed) = -1.8653600339742873 (was -1.8653600339742873)
+		P(originPriorEs.t:relaxedCleanAlignTrimmed) = -55.103596997398604 (was -55.103596997398604)
+		P(reproductiveNumberPriorEs.t:relaxedCleanAlignTrimmed) = -0.8623681928791158 (was -0.8623681928791158)
+		P(samplingProportionPriorEs.t:relaxedCleanAlignTrimmed) = 6.385554201718962 (was 6.385554201718962)
+	P(likelihood) = NaN (was NaN)  **
+		P(treeLikelihood.relaxedCleanAlignTrimmed) = NaN (was NaN)  **
+Fatal exception: Could not find a proper state to initialise. Perhaps try another seed.
+See http://www.beast2.org/2018/07/04/fatal-errors.html for other possible solutions.
+java.lang.RuntimeException: Could not find a proper state to initialise. Perhaps try another seed.
+See http://www.beast2.org/2018/07/04/fatal-errors.html for other possible solutions.
+	at beast.core.MCMC.run(Unknown Source)
+	at beast.app.BeastMCMC.run(Unknown Source)
+	at beast.app.beastapp.BeastMain.<init>(Unknown Source)
+	at beast.app.beastapp.BeastMain.main(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at beast.app.beastapp.BeastLauncher.run(Unknown Source)
+	at beast.app.beastapp.BeastLauncher.main(Unknown Source)
+Fatal exception: Could not find a proper state to initialise. Perhaps try another seed.
+See http://www.beast2.org/2018/07/04/fatal-errors.html for other possible solutions.
+java.lang.RuntimeException: An error was encounted. Terminating BEAST
+	at beast.app.util.ErrorLogHandler.publish(Unknown Source)
+	at java.util.logging.Logger.log(Logger.java:738)
+	at java.util.logging.Logger.doLog(Logger.java:765)
+	at java.util.logging.Logger.log(Logger.java:788)
+	at java.util.logging.Logger.severe(Logger.java:1464)
+	at beast.app.beastapp.BeastMain.<init>(Unknown Source)
+	at beast.app.beastapp.BeastMain.main(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at beast.app.beastapp.BeastLauncher.run(Unknown Source)
+	at beast.app.beastapp.BeastLauncher.main(Unknown Source)

@@ -1,0 +1,415 @@
+# Library
+library(pomp)
+library(ggplot2)
+library(reshape2)
+library(dplyr)
+library(lubridate) 
+library(scales)
+library(gridExtra)
+library(cowplot)
+
+# Input
+init_S = 6999999
+init_I = 1
+init_R = 0
+est_beta = 0.2709
+est_gamma = 0.2184
+last_date = "2022-03-19"
+num_dates_in_bdsir_projection = 818
+  
+# Set the model
+pomp(
+  data=data.frame(
+    time=seq(0, num_dates_in_bdsir_projection - 1, by=1),
+    reports=NA
+  ),
+  times="time",t0=0,
+  rprocess=gillespie_hl(
+    birth=list("rate=mu*N;",c(N=1,X=1,Y=0,Z=0,cases=0)),
+    deathS=list("rate=mu*X;",c(N=-1,X=-1,Y=0,Z=0,cases=0)),
+    deathI=list("rate=mu*Y;",c(N=-1,X=0,Y=-1,Z=0,cases=0)),
+    deathR=list("rate=mu*Z;",c(N=-1,X=0,Y=0,Z=-1,cases=0)),
+    infection=list("rate=Beta*X*Y/N;",c(N=0,X=-1,Y=1,Z=0,cases=1)),
+    recovery=list("rate=gamma*Y;",c(N=0,X=0,Y=-1,Z=1,cases=0)),
+    hmax=0.01
+  ),
+  rmeasure=Csnippet("reports=rbinom(cases,rho);"),
+  paramnames=c("rho","mu","Beta","gamma"),
+  statenames=c("N","X","Y","Z","cases"),
+  accumvars=c("cases"),
+  params=c(X.0=init_S, Y.0=init_I, Z.0=init_R, N.0=7000000, cases.0=0,
+           mu=0, Beta=est_beta, gamma=est_gamma, rho=0.5)
+) -> sir
+
+# Produce simulations
+simulate(sir, nsim=100, format="data.frame") -> sims
+sde <- subset(sims, select = c(time, .id, Y))
+sde <- reshape(sde, idvar = "time", timevar = ".id", direction = "wide")
+dates <- rev(seq.Date(as.Date(last_date), by = "-1 day", length.out = nrow(sde)))
+sde$date <- format(as.Date(dates), "%m/%d/%y");
+
+# Calculate median of simulations
+sde <- sde %>% 
+  rowwise() %>% 
+  mutate(median = median(c(Y.1, Y.2, Y.3, Y.4, Y.5, Y.6, Y.7, Y.8, Y.9, Y.10, Y.11, Y.12, Y.13, Y.14, Y.15, Y.16, Y.17, Y.18, Y.19, Y.20, Y.21, Y.22, Y.23, Y.24, Y.25, Y.26, Y.27, Y.28, Y.29, Y.30, Y.31, Y.32, Y.33, Y.34, Y.35, Y.36, Y.37, Y.38, Y.39, Y.40, Y.41, Y.42, Y.43, Y.44, Y.45, Y.46, Y.47, Y.48, Y.49, Y.50, Y.51, Y.52, Y.53, Y.54, Y.55, Y.56, Y.57, Y.58, Y.59, Y.60, Y.61, Y.62, Y.63, Y.64, Y.65, Y.66, Y.67, Y.68, Y.69, Y.70, Y.71, Y.72, Y.73, Y.74, Y.75, Y.76, Y.77, Y.78, Y.79, Y.80, Y.81, Y.82, Y.83, Y.84, Y.85, Y.86, Y.87, Y.88, Y.89, Y.90, Y.91, Y.92, Y.93, Y.94, Y.95, Y.96, Y.97, Y.98, Y.99, Y.100), na.rm = TRUE))
+
+# Load simulation results from other models
+models <- read.delim(file = "ncr-bdsir-ode-projection.csv" , sep = ',', header = TRUE)
+
+
+# Load reported data
+reported <- read.delim(file = "ncr-reported-projection-data.csv" , sep = ',', header = TRUE)
+
+# Plot fit of reported to SIR during sampling period
+fit <- ggplot() +
+  geom_col(reported, mapping = aes(x=as.Date(date, format="%d-%b-%y") , y=reported, fill = "Reported Data")) +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "Deterministic SIR (using reported data)"), size = 1.0) +
+  scale_x_date(date_breaks = "1 month", 
+               labels=date_format("%b-%Y"),
+               limits = as.Date(c('2020-03-01','2020-07-31'))) +
+  scale_y_continuous(limits = c(0, 2500)) +
+  scale_colour_manual(" ",
+                      values = c("Deterministic SIR (using reported data)" = "dark red")) +
+  scale_fill_manual("",values=alpha("orange",0.5)) + 
+  theme_classic() +
+  labs(x="Date", y="Number of Cases") +
+  theme(legend.position = "top")
+
+reportedgenome <- read.delim(file = "ncr-bdsir-infected.csv" , sep = ',', header = TRUE)
+fitgenome <- ggplot() +
+  geom_col(reportedgenome, mapping = aes(x=as.Date(bdsir_date, format="%Y-%m-%d") , y=bdsir_infected, fill = "Reported Data")) +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=genomic, colour = "Deterministic SIR (using genomic data)"), size = 1.0) +
+  scale_x_date(date_breaks = "1 month", 
+               labels=date_format("%b-%Y"),
+               limits = as.Date(c('2020-03-01','2020-10-30'))
+               ) +
+  # scale_y_continuous(limits = c(0, 20000)) +
+  scale_colour_manual(" ",
+                      values = c("Deterministic SIR (using reported data)" = "dark red")) +
+  scale_fill_manual("",values=alpha("orange",0.5)) + 
+  theme_classic() +
+  labs(x="Date", y="Number of Cases") +
+  theme(legend.position = "top")
+
+
+# Save plot
+ggsave(plot = fit,
+       filename = "data-fitting.png",
+       width = 7, height = 5, units = "in", dpi = 300)
+
+ggsave(plot = fitgenome,
+       filename = "data-fitting-genome.png",
+       width = 7, height = 5, units = "in", dpi = 300)
+
+# Define scale multiplier
+mult <- 100;
+
+# Plot models
+p <- ggplot() +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.1, colour = "Stochastic SIR",), size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.2), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.3), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.4), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.5), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.6), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.7), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.8), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.9), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.10), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.11), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.12), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.13), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.14), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.15), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.16), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.17), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.18), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.19), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.20), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.21), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.22), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.23), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.24), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.25), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.26), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.27), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.28), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.29), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.30), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.31), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.32), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.33), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.34), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.35), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.36), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.37), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.38), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.39), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.30), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.41), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.42), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.43), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.44), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.45), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.46), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.47), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.48), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.49), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.40), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.51), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.52), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.53), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.54), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.55), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.56), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.57), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.58), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.59), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.50), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.61), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.62), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.63), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.64), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.65), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.66), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.67), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.68), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.69), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.60), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.71), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.72), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.73), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.74), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.75), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.76), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.77), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.78), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.79), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.70), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.81), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.82), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.83), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.84), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.85), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.86), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.87), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.88), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.89), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.80), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.91), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.92), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.93), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.94), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.95), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.96), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.97), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.98), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.99), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.100), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=genomic, colour = "Deterministic SIR"), size = 1.0) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=median, colour = "Stochastic SIR (median)"), size = 1.0) +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "Deterministic SIR (using reported data)"), size = 1.0) +
+  geom_col(reported, mapping = aes(x=as.Date(date, format="%d-%b-%y") , y=reported*mult, fill = "Reported data")) +
+  theme_classic() +
+  labs(x="Date", y="Number of Projected Cases") +
+  scale_x_date(date_breaks = "3 month", 
+               labels=date_format("%b-%Y")) +
+  scale_colour_manual(" ",
+                      values = c("Deterministic SIR" = "dark blue", 
+                                 "Stochastic SIR (median)" = "dark green", 
+                                 "Stochastic SIR" = "gray70", 
+                                 "Deterministic SIR (using reported data)" = "dark red"))  +
+  scale_fill_manual("",values=alpha("orange",0.5)) + 
+  theme(legend.position = "top") +
+  geom_vline(xintercept = as.Date("9/2/20", format="%m/%d/%y"), linetype = 4, color="black") +
+  theme(text = element_text(size=15),
+        axis.title.y.left = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)),
+        axis.title.y.right = element_text(margin = margin(t = 0, r = 0, b = 0, l = 15)),
+        axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
+        legend.key=element_blank(),
+        axis.ticks.y.right = element_line(color = "orange"),
+        axis.line.y.right = element_line(color = "orange"),
+        axis.text.y.right = element_text(colour = "orange")) +
+  scale_y_continuous(label = comma,
+                     sec.axis=sec_axis(~.*1/mult,name="Number of Reported Cases")) +
+  annotate("rect", xmin = as.Date("7/18/20", format="%m/%d/%y"), xmax = as.Date("3/8/22", format="%m/%d/%y"), 
+           ymin = 0, ymax = 700000,
+           alpha = .2) +
+  annotate("text", x = as.Date("1/8/22", format="%m/%d/%y"), y = 560000, label = "Projection")
+p
+# Save plot
+ggsave(plot = p,
+       filename = "ncr-bdsir-projection.png",
+       width = 13, height = 5, units = "in", dpi = 300)
+
+# Plot models - no projection
+
+# Set the model
+pomp(
+  data=data.frame(
+    time=seq(0, 139, by=1),
+    reports=NA
+  ),
+  times="time",t0=0,
+  rprocess=gillespie_hl(
+    birth=list("rate=mu*N;",c(N=1,X=1,Y=0,Z=0,cases=0)),
+    deathS=list("rate=mu*X;",c(N=-1,X=-1,Y=0,Z=0,cases=0)),
+    deathI=list("rate=mu*Y;",c(N=-1,X=0,Y=-1,Z=0,cases=0)),
+    deathR=list("rate=mu*Z;",c(N=-1,X=0,Y=0,Z=-1,cases=0)),
+    infection=list("rate=Beta*X*Y/N;",c(N=0,X=-1,Y=1,Z=0,cases=1)),
+    recovery=list("rate=gamma*Y;",c(N=0,X=0,Y=-1,Z=1,cases=0)),
+    hmax=0.01
+  ),
+  rmeasure=Csnippet("reports=rbinom(cases,rho);"),
+  paramnames=c("rho","mu","Beta","gamma"),
+  statenames=c("N","X","Y","Z","cases"),
+  accumvars=c("cases"),
+  params=c(X.0=6999970.8, Y.0=29.2, Z.0=0, N.0=7000000, cases.0=0,
+           mu=0, Beta=0.0891, gamma=0.0611, rho=0.5)
+) -> sir
+
+# Produce simulations
+simulate(sir, nsim=100, format="data.frame") -> sims
+sde <- subset(sims, select = c(time, .id, Y))
+sde <- reshape(sde, idvar = "time", timevar = ".id", direction = "wide")
+dates <- rev(seq.Date(as.Date("2020-07-27"), by = "-1 day", length.out = nrow(sde)))
+sde$date <- format(as.Date(dates), "%m/%d/%y");
+
+# Calculate median of simulations
+sde <- sde %>% 
+  rowwise() %>% 
+  mutate(median = median(c(Y.1, Y.2, Y.3, Y.4, Y.5, Y.6, Y.7, Y.8, Y.9, Y.10, Y.11, Y.12, Y.13, Y.14, Y.15, Y.16, Y.17, Y.18, Y.19, Y.20, Y.21, Y.22, Y.23, Y.24, Y.25, Y.26, Y.27, Y.28, Y.29, Y.30, Y.31, Y.32, Y.33, Y.34, Y.35, Y.36, Y.37, Y.38, Y.39, Y.40, Y.41, Y.42, Y.43, Y.44, Y.45, Y.46, Y.47, Y.48, Y.49, Y.50, Y.51, Y.52, Y.53, Y.54, Y.55, Y.56, Y.57, Y.58, Y.59, Y.60, Y.61, Y.62, Y.63, Y.64, Y.65, Y.66, Y.67, Y.68, Y.69, Y.70, Y.71, Y.72, Y.73, Y.74, Y.75, Y.76, Y.77, Y.78, Y.79, Y.80, Y.81, Y.82, Y.83, Y.84, Y.85, Y.86, Y.87, Y.88, Y.89, Y.90, Y.91, Y.92, Y.93, Y.94, Y.95, Y.96, Y.97, Y.98, Y.99, Y.100), na.rm = TRUE))
+
+
+p2 <- ggplot() +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.1, colour = "Stochastic SIR",), size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.2), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.3), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.4), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.5), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.6), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.7), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.8), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.9), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.10), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.11), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.12), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.13), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.14), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.15), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.16), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.17), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.18), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.19), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.20), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.21), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.22), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.23), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.24), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.25), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.26), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.27), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.28), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.29), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.30), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.31), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.32), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.33), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.34), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.35), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.36), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.37), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.38), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.39), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.30), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.41), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.42), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.43), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.44), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.45), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.46), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.47), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.48), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.49), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.40), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.51), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.52), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.53), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.54), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.55), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.56), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.57), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.58), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.59), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.50), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.61), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.62), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.63), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.64), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.65), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.66), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.67), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.68), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.69), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.60), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.71), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.72), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.73), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.74), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.75), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.76), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.77), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.78), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.79), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.70), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.81), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.82), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.83), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.84), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.85), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.86), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.87), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.88), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.89), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.80), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.91), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.92), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.93), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.94), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.95), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.96), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.97), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.98), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.99), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.100), color = "gray70", size = 1.0, alpha = 1) +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=genomic, colour = "Deterministic SIR"), size = 1.0) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=median, colour = "Stochastic SIR (median)"), size = 1.0) +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "Deterministic SIR (using reported data)"), size = 1.0) +
+  geom_col(reported, mapping = aes(x=as.Date(date, format="%d-%b-%y") , y=reported, fill = "Reported data")) +
+  scale_y_log10( breaks = c(0, 10, 100, 1000, 10000, 100000, 1000000), limits = c(1, 1000000)) +
+  theme_classic() +
+  labs(x="Date", y="Number of Infected Individuals") +
+  scale_x_date(date_breaks = "1 month", 
+               labels=date_format("%b-%Y"),
+               limits = as.Date(c('2020-03-01','2020-07-27'))) +
+  scale_colour_manual(" ",
+                      values = c("BSIR" = "dark blue", 
+                                 "Stochastic SIR (median)" = "dark green", 
+                                 "Stochastic SIR" = "gray70", 
+                                 "Deterministic SIR" = "dark red"))  +
+  scale_fill_manual("",values=alpha("orange",0.5)) + 
+  theme(legend.position = "top") +
+  theme(text = element_text(size=15),
+        axis.title.y.left = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)),
+        axis.title.y.right = element_text(margin = margin(t = 0, r = 0, b = 0, l = 15)),
+        axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
+        legend.key=element_blank(),
+        axis.ticks.y.right = element_line(color = "orange"),
+        axis.line.y.right = element_line(color = "orange"),
+        axis.text.y.right = element_text(colour = "orange"))
+p2
+
+# Save plot
+ggsave(plot = p2,
+       filename = "ncr-bdsir-comp.png",
+       width = 7, height = 5, units = "in", dpi = 300)

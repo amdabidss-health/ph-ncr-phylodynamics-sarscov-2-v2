@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sbatch ncrRelaxedCleanBdskyIntPost
+sbatch ncrRelaxedCleanBdskyIntPrior
+sbatch ncrRelaxedCleanBdskyMajPost
+sbatch ncrRelaxedCleanBdskyMajPrior

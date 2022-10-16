@@ -1,0 +1,74 @@
+SLURM_JOBID        : 321873
+SLURM_JOB_NODELIST : saliksik-cpu-07
+SLURM_NNODES       : 1
+SLURMTMPDIR        : 
+working directory  : /scratch3/imari.borda/ncr-75/bdsir
+>> beast/2.6.6 has been loaded.
+>> java/1.8.0 has been loaded.
+>> beagle/3.1.2 has been loaded.
+
+                        BEAST v2.6.6, 2002-2021
+             Bayesian Evolutionary Analysis Sampling Trees
+                       Designed and developed by
+ Remco Bouckaert, Alexei J. Drummond, Andrew Rambaut & Marc A. Suchard
+                                    
+                   Centre for Computational Evolution
+                         University of Auckland
+                       r.bouckaert@auckland.ac.nz
+                        alexei@cs.auckland.ac.nz
+                                    
+                   Institute of Evolutionary Biology
+                        University of Edinburgh
+                           a.rambaut@ed.ac.uk
+                                    
+                    David Geffen School of Medicine
+                 University of California, Los Angeles
+                           msuchard@ucla.edu
+                                    
+                      Downloads, Help & Resources:
+                           http://beast2.org/
+                                    
+  Source code distributed under the GNU Lesser General Public License:
+                   http://github.com/CompEvol/beast2
+                                    
+                           BEAST developers:
+   Alex Alekseyenko, Trevor Bedford, Erik Bloomquist, Joseph Heled, 
+ Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li, 
+Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel, 
+          Oliver Pybus, Tim Vaughan, Chieh-Hsi Wu, Walter Xie
+                                    
+                               Thanks to:
+          Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Random number seed: 1660576333884
+
+File: ncr-new-relaxedClean-bdsir-post.xml seed: 1660576333884 threads: 5
+Loading package BDMM v1.0
+Loading package MultiTypeTree v7.0.2
+Loading package BEAST v2.6.6
+Loading package MASTER v6.1.2
+Loading package BEAST_CLASSIC v1.5.0
+Loading package BDSKY v1.4.7
+Loading package phylodynamics v1.3.0
+Loading package BEASTLabs v1.9.7
+Loading package skylinetools v0.2.0
+Loading package BEAST v2.6.6
+Alignment(relaxedCleanAlignTrimmed)
+  75 taxa
+  29690 sites
+  548 patterns
+
+Using format 'yyyy-MM-dd' to parse '2020-03-26' as: 2020.2322404371585
+Using format 'yyyy-MM-dd' to parse '2020-03-28' as: 2020.2377049180327
+Using format 'yyyy-MM-dd' to parse '2020-03-13' as: 2020.1967213114754
+Using format 'yyyy-MM-dd' to parse '2020-03-19' as: 2020.2131147540983
+Using format 'yyyy-MM-dd' to parse '2020-03-13' as: 2020.1967213114754
+Using format 'yyyy-MM-dd' to parse '2020-06-23' as: 2020.4754098360656
+Using format 'yyyy-MM-dd' to parse '2020-06-22' as: 2020.4726775956285
+Using format 'yyyy-MM-dd' to parse '2020-04-03' as: 2020.2540983606557
+Using format 'yyyy-MM-dd' to parse '2020-04-09' as: 2020.2704918032787
+Using format 'yyyy-MM-dd' to parse '2020-03-14' as: 2020.1994535519125
+(more warnings visible with loglevel=debug )...
+MT919768 = 2020-04-03 (0.3142076502733744)
+slurmstepd: error: *** JOB 321873 ON saliksik-cpu-07 CANCELLED AT 2022-08-22T22:00:31 ***
+MT919769 = 2020-06-25 (0.08743169398917416)

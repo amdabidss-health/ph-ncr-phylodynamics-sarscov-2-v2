@@ -1,0 +1,67 @@
+SLURM_JOBID        : 321878
+SLURM_JOB_NODELIST : saliksik-cpu-26
+SLURM_NNODES       : 1
+SLURMTMPDIR        : 
+working directory  : /scratch3/imari.borda/ncr-75/bdsky
+>> beast/2.6.6 has been loaded.
+>> java/1.8.0 has been loaded.
+>> beagle/3.1.2 has been loaded.
+
+                        BEAST v2.6.6, 2002-2021
+             Bayesian Evolutionary Analysis Sampling Trees
+                       Designed and developed by
+ Remco Bouckaert, Alexei J. Drummond, Andrew Rambaut & Marc A. Suchard
+                                    
+                   Centre for Computational Evolution
+                         University of Auckland
+                       r.bouckaert@auckland.ac.nz
+                        alexei@cs.auckland.ac.nz
+                                    
+                   Institute of Evolutionary Biology
+                        University of Edinburgh
+                           a.rambaut@ed.ac.uk
+                                    
+                    David Geffen School of Medicine
+                 University of California, Los Angeles
+                           msuchard@ucla.edu
+                                    
+                      Downloads, Help & Resources:
+                           http://beast2.org/
+                                    
+  Source code distributed under the GNU Lesser General Public License:
+                   http://github.com/CompEvol/beast2
+                                    
+                           BEAST developers:
+   Alex Alekseyenko, Trevor Bedford, Erik Bloomquist, Joseph Heled, 
+ Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li, 
+Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel, 
+          Oliver Pybus, Tim Vaughan, Chieh-Hsi Wu, Walter Xie
+                                    
+                               Thanks to:
+          Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Random number seed: 1661176864942
+
+File: ncr-new-relaxedClean-bdsky-maj-post.xml seed: 1661176864942 threads: 5
+Loading package BDMM v1.0
+Loading package MultiTypeTree v7.0.2
+Loading package BEAST v2.6.6
+Loading package MASTER v6.1.2
+Loading package BEAST_CLASSIC v1.5.0
+Loading package BDSKY v1.4.7
+Loading package phylodynamics v1.3.0
+Loading package BEASTLabs v1.9.7
+Loading package skylinetools v0.2.0
+Loading package BEAST v2.6.6
+
+Error 130 parsing the xml input file
+
+Input 102: type mismatch for input treeSlice
+
+Error detected about here:
+  <beast>
+      <run id='mcmc' spec='MCMC'>
+          <logger id='tracelog' spec='Logger'>
+              <log spec='TreeSliceDateLogger'>
+
+srun: error: saliksik-cpu-26: task 0: Exited with exit code 1
