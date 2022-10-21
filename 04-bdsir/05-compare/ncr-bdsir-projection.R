@@ -7,6 +7,7 @@ library(lubridate)
 library(scales)
 library(gridExtra)
 library(cowplot)
+library(tidyr)
 
 # Input
 init_S = 6999999
@@ -213,7 +214,8 @@ p <- ggplot() +
   theme_classic() +
   labs(x="Date", y="Number of Projected Cases") +
   scale_x_date(date_breaks = "3 month", 
-               labels=date_format("%b-%Y")) +
+               labels=date_format("%b-%Y"),
+               limits = as.Date(c('2020-03-01','2021-03-31'))) +
   scale_colour_manual(" ",
                       values = c("Deterministic SIR" = "dark blue", 
                                  "Stochastic SIR (median)" = "dark green", 
@@ -232,15 +234,15 @@ p <- ggplot() +
         axis.text.y.right = element_text(colour = "orange")) +
   scale_y_continuous(label = comma,
                      sec.axis=sec_axis(~.*1/mult,name="Number of Reported Cases")) +
-  annotate("rect", xmin = as.Date("7/18/20", format="%m/%d/%y"), xmax = as.Date("3/8/22", format="%m/%d/%y"), 
+  annotate("rect", xmin = as.Date("7/27/20", format="%m/%d/%y"), xmax = as.Date("3/31/21", format="%m/%d/%y"), 
            ymin = 0, ymax = 700000,
            alpha = .2) +
-  annotate("text", x = as.Date("1/8/22", format="%m/%d/%y"), y = 560000, label = "Projection")
+  annotate("text", x = as.Date("2/31/21", format="%m/%d/%y"), y = 560000, label = "Projection")
 p
 # Save plot
 ggsave(plot = p,
        filename = "ncr-bdsir-projection.png",
-       width = 13, height = 5, units = "in", dpi = 300)
+       width = 12, height = 5, units = "in", dpi = 300)
 
 # Plot models - no projection
 
@@ -409,7 +411,22 @@ p2 <- ggplot() +
         axis.text.y.right = element_text(colour = "orange"))
 p2
 
-# Save plot
+# Slope/Relative Growth Rate
+bdsirOde <- data.frame(models$date, models$genomic)
+bdsirOde$ode <- models$reported
+bdsirOde <- bdsirOde[!apply(is.na(bdsirOde) | bdsirOde == "", 1, all),]
+colnames(bdsirOde) <- c("date", "bdsir", "ode")
+bdsirOde$date <- as.Date(bdsirOde$date, format="%m/%d/%y")
+bdsirOde <- bdsirOde[as.Date(bdsirOde[["date"]]) <= as.Date('2020-07-27'), ]
+bdsirOde <- bdsirOde[as.Date(bdsirOde[["date"]]) >= as.Date('2020-03-01'), ]
+bdsirOde <- bdsirOde %>%
+  complete(date = seq.Date(as.Date('2020-03-01'), as.Date('2020-07-27'), by = "day"))
+bdsirOde <- na_interpolation(bdsirOde, option = "linear")
+bdsirOde$date <- 1:149
+lm(formula = log(bdsirOde$bdsir) ~ bdsirOde$date) #0.05122
+lm(formula = log(bdsirOde$ode) ~ bdsirOde$date) #0.02799 
+
+# Save plots
 ggsave(plot = p2,
        filename = "ncr-bdsir-comp.png",
-       width = 7, height = 5, units = "in", dpi = 300)
+       width = 12, height = 5, units = "in", dpi = 300)

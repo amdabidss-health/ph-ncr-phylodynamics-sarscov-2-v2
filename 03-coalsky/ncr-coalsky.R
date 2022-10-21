@@ -23,7 +23,7 @@ p <- ggplot(data = coal) +
   scale_x_date(date_breaks = "1 month", 
                labels=date_format("%b-%Y")) +
   geom_ribbon(data = coal, aes(x=as.Date(date, "%m/%d/%y"), ymin=lower, ymax=upper), fill="dark blue", alpha=0.4) +
-  scale_y_log10(limits=c(0.01,10)) +
+  #scale_y_log10(limits=c(0.01,10)) +
   geom_vline(xintercept = as.Date(c("2020/3/17")), 
              linetype = 1, 
              color = "black") +

@@ -89,18 +89,18 @@ p <- ggplot(data_tidy, aes(x=interval, y=rep, fill=distribution)) + geom_split_v
 
 # Put error bars
 first.prior.mid = median(data_tidy[data_tidy$condition == "first.prior", ]$rep)
-first.prior.bot = quantile(data_tidy[data_tidy$condition == "first.prior", ]$rep, 0.05)
-first.prior.top = quantile(data_tidy[data_tidy$condition == "first.prior", ]$rep, 0.95)
+first.prior.bot = quantile(data_tidy[data_tidy$condition == "first.prior", ]$rep, 0.025)
+first.prior.top = quantile(data_tidy[data_tidy$condition == "first.prior", ]$rep, 0.975)
 first.post.mid = median(data_tidy[data_tidy$condition == "first.post", ]$rep)
-first.post.bot = quantile(data_tidy[data_tidy$condition == "first.post", ]$rep, 0.05)
-first.post.top = quantile(data_tidy[data_tidy$condition == "first.post", ]$rep, 0.95)
+first.post.bot = quantile(data_tidy[data_tidy$condition == "first.post", ]$rep, 0.025)
+first.post.top = quantile(data_tidy[data_tidy$condition == "first.post", ]$rep, 0.975)
 
 second.prior.mid = median(data_tidy[data_tidy$condition == "second.prior", ]$rep)
-second.prior.bot = quantile(data_tidy[data_tidy$condition == "second.prior", ]$rep, 0.05)
-second.prior.top = quantile(data_tidy[data_tidy$condition == "second.prior", ]$rep, 0.95)
+second.prior.bot = quantile(data_tidy[data_tidy$condition == "second.prior", ]$rep, 0.025)
+second.prior.top = quantile(data_tidy[data_tidy$condition == "second.prior", ]$rep, 0.975)
 second.post.mid = median(data_tidy[data_tidy$condition == "second.post", ]$rep)
-second.post.bot = quantile(data_tidy[data_tidy$condition == "second.post", ]$rep, 0.05)
-second.post.top = quantile(data_tidy[data_tidy$condition == "second.post", ]$rep, 0.95)
+second.post.bot = quantile(data_tidy[data_tidy$condition == "second.post", ]$rep, 0.025)
+second.post.top = quantile(data_tidy[data_tidy$condition == "second.post", ]$rep, 0.975)
 
 p <- p + annotate("pointrange", x = 1.05, y = first.prior.mid, ymin = first.prior.bot, ymax = first.prior.top,
                   colour = "green", size = .5) + 
@@ -126,9 +126,9 @@ maj <- ggplot(data=df.maj) +
         text = element_text(size=15),
         axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)),
         axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0))) +
-  annotate("pointrange", y = 0.0005, x = as.Date(median(df.pri.maj)), xmin = as.Date(quantile((df.pri.maj), 0.05)), xmax = as.Date(quantile((df.pri.maj), 0.95)),
+  annotate("pointrange", y = 0.0005, x = as.Date(median(df.pri.maj)), xmin = as.Date(quantile((df.pri.maj), 0.025)), xmax = as.Date(quantile((df.pri.maj), 0.975)),
            colour = "green", size = .5) + 
-  annotate("pointrange", y = 0.0030, x = as.Date(median(df.pos.maj)), xmin = as.Date(quantile((df.pos.maj), 0.05)), xmax = as.Date(quantile((df.pos.maj), 0.95)),
+  annotate("pointrange", y = 0.0030, x = as.Date(median(df.pos.maj)), xmin = as.Date(quantile((df.pos.maj), 0.025)), xmax = as.Date(quantile((df.pos.maj), 0.975)),
            colour = "green", size = .5) 
 
 # Save Plot

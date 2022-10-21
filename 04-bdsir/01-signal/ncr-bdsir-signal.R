@@ -53,39 +53,56 @@ ori <- ggplot(data=df.ori) +
   theme_classic() +
   labs(x = " ", y = "Marginal Density", title = "Date of Origin") +
   scale_x_date(date_breaks = "2 month", labels=date_format("%b-%Y")) + 
-  geom_vline(data=df.ori, aes(xintercept=mean(posterior)),  colour="dark blue") +
-  geom_vline(data=df.ori, aes(xintercept=quantile(posterior, 0.05, type = 1)), colour="dark blue", linetype="dashed") +
-  geom_vline(data=df.ori, aes(xintercept=quantile(posterior, 0.95, type = 1)), colour="dark blue", linetype="dashed")
+  geom_vline(data=df.ori, aes(xintercept=median(posterior)),  colour="dark blue") +
+  geom_vline(data=df.ori, aes(xintercept=quantile(posterior, 0.025, type = 1)), colour="dark blue", linetype="dashed") +
+  geom_vline(data=df.ori, aes(xintercept=quantile(posterior, 0.975, type = 1)), colour="dark blue", linetype="dashed")
 
 rep <- ggplot(data=df.rep) +
   geom_density(aes(x=posterior,y=..density..), color=FALSE , fill="blue", alpha=.3) +
   geom_density(aes(x=prior,y=..density..), size=1, color='black', linetype="dashed") +
   theme_classic() +
   labs(x = " ", y = "Marginal Density", title = "Basic Reproductive Number") +
-  geom_vline(data=df.rep, aes(xintercept=mean(posterior)),  colour="dark blue") +
-  geom_vline(data=df.rep, aes(xintercept=quantile(posterior, 0.05, type = 1)), colour="dark blue", linetype="dashed") +
-  geom_vline(data=df.rep, aes(xintercept=quantile(posterior, 0.95, type = 1)), colour="dark blue", linetype="dashed")
+  geom_vline(data=df.rep, aes(xintercept=median(posterior)),  colour="dark blue") +
+  geom_vline(data=df.rep, aes(xintercept=quantile(posterior, 0.025, type = 1)), colour="dark blue", linetype="dashed") +
+  geom_vline(data=df.rep, aes(xintercept=quantile(posterior, 0.975, type = 1)), colour="dark blue", linetype="dashed")
 
 uni <- ggplot(data=df.uni) +
   geom_density(aes(x=posterior,y=..density..), color=FALSE , fill="blue", alpha=.3) +
   geom_density(aes(x=prior,y=..density..), size=1, color='black', linetype="dashed") +
   theme_classic() +
   labs(x = " ", y = "Marginal Density", title = "Become Uninfectious Rate") +
-  geom_vline(data=df.uni, aes(xintercept=mean(posterior)),  colour="dark blue") +
-  geom_vline(data=df.uni, aes(xintercept=quantile(posterior, 0.05, type = 1)), colour="dark blue", linetype="dashed") +
-  geom_vline(data=df.uni, aes(xintercept=quantile(posterior, 0.95, type = 1)), colour="dark blue", linetype="dashed")
+  geom_vline(data=df.uni, aes(xintercept=median(posterior)),  colour="dark blue") +
+  geom_vline(data=df.uni, aes(xintercept=quantile(posterior, 0.025, type = 1)), colour="dark blue", linetype="dashed") +
+  geom_vline(data=df.uni, aes(xintercept=quantile(posterior, 0.975, type = 1)), colour="dark blue", linetype="dashed")
 
 sam <- ggplot(data=df.sam) +
   geom_density(aes(x=posterior,y=..density..), color=FALSE , fill="blue", alpha=.3) +
   geom_density(aes(x=prior,y=..density..), size=1, color='black', linetype="dashed") +
   theme_classic() +
   labs(x = " ", y = "Marginal Density", title = "Sampling Proportion") +
-  geom_vline(data=df.sam, aes(xintercept=mean(posterior)),  colour="dark blue") +
-  geom_vline(data=df.sam, aes(xintercept=quantile(posterior, 0.05, type = 1)), colour="dark blue", linetype="dashed") +
-  geom_vline(data=df.sam, aes(xintercept=quantile(posterior, 0.95, type = 1)), colour="dark blue", linetype="dashed")
+  geom_vline(data=df.sam, aes(xintercept=median(posterior)),  colour="dark blue") +
+  geom_vline(data=df.sam, aes(xintercept=quantile(posterior, 0.025, type = 1)), colour="dark blue", linetype="dashed") +
+  geom_vline(data=df.sam, aes(xintercept=quantile(posterior, 0.975, type = 1)), colour="dark blue", linetype="dashed")
 
 all <- plot_grid(ori, rep, uni, sam, ncol=2,align="v",
                  labels = c('A', 'B', 'C', 'D'))
+
+# Values
+median(df.ori$posterior)
+latest.sample - (quantile(df.ori$posterior, 0.025)*365)
+latest.sample - (quantile(df.ori$posterior, 0.975)*365)
+
+median(df.rep$posterior)
+quantile(df.rep$posterior, 0.025)
+quantile(df.rep$posterior, 0.975)
+
+median(df.uni$posterior)
+quantile(df.uni$posterior, 0.025)
+quantile(df.uni$posterior, 0.975)
+
+median(df.sam$posterior)
+quantile(df.sam$posterior, 0.025)
+quantile(df.sam$posterior, 0.975)
 
 # Kolmogorov-Smirnov test
 pval_ori <- ks.test(as.numeric(df.ori$posterior), as.numeric(df.ori$prior)) #p-value<2.2e-16
