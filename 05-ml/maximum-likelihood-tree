@@ -1,0 +1,44 @@
+#!/bin/bash
+
+##--Allocate Resources--##
+#SBATCH --mail-user=scbuenaventura@up.edu.ph
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --job-name=NCRGlobal
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=10
+#SBATCH --output=NCRGlobal.out
+#SBATCH --error=NCRGlobal.err
+#SBATCH --mem=10G
+
+## --Initialize Variables-- ##
+input="NCRglobalV3" #specify input filename w/o file extension
+threads="20" #specify threads. must be equal to ntasks*cpu-per-task
+
+
+## --Initialize Tools-- ##
+mafft="hpc imbb/mafft:7.505 mafft"
+trimal="hpc imbb/trimal:1.4.1 trimal"
+iqtree="hpc imbb/iqtree:2.2.0.3 iqtree"
+
+
+
+
+##########
+## MAIN ##
+##########
+
+
+## Alignment
+mkdir 01_align
+$mafft --thread $threads --auto ${input}.fas > 01_align/${input}_aligned.fas
+
+## Trimming
+mkdir 02_trim
+$trimal -in 01_align/${input}_aligned.fas -out 02_trim/${input}_trimmed.fas -htmlout 02_trim/${input}_trimmed.html -automated1
+
+## Run IQ-TREE
+mkdir 03_phylo
+cp 02_trim/${input}_trimmed.fas 03_phylo
+$iqtree -s 03_phylo/${input}_trimmed.fas -bb 1000 -alrt 1000 -T AUTO
+
+
