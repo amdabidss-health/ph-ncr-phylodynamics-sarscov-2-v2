@@ -282,7 +282,7 @@ sde$date <- format(as.Date(dates), "%m/%d/%y");
 
 
 p2 <- ggplot() +
-  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.1, colour = "Stochastic SIR +",), size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.1, colour = "Stochastic SIR *",), size = 1.0, alpha = 1) +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.2), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.3), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.4), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
@@ -393,7 +393,7 @@ p2 <- ggplot() +
                limits = as.Date(c('2020-03-01','2020-07-27'))) +
   scale_colour_manual(" ",
                       values = c("BDSIR +" = "dark red", 
-                                 "Stochastic SIR +" = "gray70", 
+                                 "Stochastic SIR *" = "gray70", 
                                  "Deterministic SIR *" = "dark blue"))  +
   scale_fill_manual("",values=alpha("orange",0.5)) + 
   theme(legend.position = "top") +
