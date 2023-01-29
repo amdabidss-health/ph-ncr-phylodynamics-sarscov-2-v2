@@ -208,7 +208,7 @@ p <- ggplot() +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.99), color = "gray70", size = 1.0, alpha = 1) +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.100), color = "gray70", size = 1.0, alpha = 1) +
   geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=genomic, colour = "BDSIR deterministic projection +"), size = 1.0) +
-  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "Deterministic SIR *"), size = 1.0, linetype="dashed") +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "SIR Deterministic projection *"), size = 1.0, linetype="dashed") +
   geom_col(reported, mapping = aes(x=as.Date(date, format="%d-%b-%y") , y=reported*mult, fill = "Reported data")) +
   theme_classic() +
   labs(x="Date", y="Number of Projected Cases") +
@@ -218,7 +218,7 @@ p <- ggplot() +
   scale_colour_manual(" ",
                       values = c("BDSIR deterministic projection +" = "dark red", 
                                  "BDSIR stochastic projection +" = "gray70", 
-                                 "Deterministic SIR *" = "dark blue"))  +
+                                 "SIR Deterministic projection *" = "dark blue"))  +
   scale_fill_manual("",values=alpha("orange",0.5)) + 
   theme(legend.position = "top") +
   geom_vline(xintercept = as.Date("9/2/20", format="%m/%d/%y"), linetype = 4, color="black") +
@@ -282,7 +282,7 @@ sde$date <- format(as.Date(dates), "%m/%d/%y");
 
 
 p2 <- ggplot() +
-  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.1, colour = "Stochastic SIR *",), size = 1.0, alpha = 1) +
+  geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.1, colour = "SIR Stochastic *",), size = 1.0, alpha = 1) +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.2), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.3), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.4), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
@@ -383,7 +383,7 @@ p2 <- ggplot() +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.99), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
   geom_line(sde, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=Y.100), color = "gray70", size = 1.0, alpha = 1, linetype="dashed") +
   geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=genomic, colour = "BDSIR +"), size = 1.0) +
-  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "Deterministic SIR *"), size = 1.0, linetype="dashed") +
+  geom_line(models, mapping = aes(x=as.Date(date,format="%m/%d/%y"), y=reported, colour = "SIR Deterministic *"), size = 1.0, linetype="dashed") +
   geom_col(reported, mapping = aes(x=as.Date(date, format="%d-%b-%y") , y=reported, fill = "Reported data")) +
   scale_y_log10( breaks = c(0, 10, 100, 1000, 10000, 100000, 1000000), limits = c(1, 1000000)) +
   theme_classic() +
@@ -393,8 +393,8 @@ p2 <- ggplot() +
                limits = as.Date(c('2020-03-01','2020-07-27'))) +
   scale_colour_manual(" ",
                       values = c("BDSIR +" = "dark red", 
-                                 "Stochastic SIR *" = "gray70", 
-                                 "Deterministic SIR *" = "dark blue"))  +
+                                 "SIR Stochastic *" = "gray70", 
+                                 "SIR Deterministic *" = "dark blue"))  +
   scale_fill_manual("",values=alpha("orange",0.5)) + 
   theme(legend.position = "top") +
   theme(text = element_text(size=15),
