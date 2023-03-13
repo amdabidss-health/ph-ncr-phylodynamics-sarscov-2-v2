@@ -20,9 +20,8 @@ fit <- ggplot() +
                limits = as.Date(c('2020-03-01','2020-07-31'))) +
   scale_fill_manual("",values=alpha("orange",0.5)) + 
   theme_classic() +
-  labs(title=paste0("Reported COVID-19 Cases in NCR Philippines")) +
   labs(x="Date", y="Number of Cases") +
-  theme(legend.position = "top") +
+  theme(legend.position = "none") +
   theme(plot.margin = margin(.5,1,.5,.5, "cm"))
 fit
 
