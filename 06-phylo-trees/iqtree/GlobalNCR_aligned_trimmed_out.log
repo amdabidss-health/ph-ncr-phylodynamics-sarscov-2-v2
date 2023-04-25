@@ -1,0 +1,804 @@
+IQ-TREE multicore version 2.1.3 COVID-edition for Linux 64-bit built Apr 21 2021
+Developed by Bui Quang Minh, James Barbetti, Nguyen Lam Tung,
+Olga Chernomor, Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    saliksik-cpu-18.coare.local (AVX2, FMA3, 503 GB RAM)
+Command: /home/ian.quibod/scratch2/Xoo_fasta_unpadded/bacterial_annotation/iqtree-2.1.3-Linux/bin/iqtree2 -s GlobalNCR_aligned_trimmed.fas -bb 1000 -alrt 1000 -T AUTO -o Wuhan/Hu-1/2019 --prefix GlobalNCR_aligned_trimmed_out
+Seed:    655064 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Tue Mar 14 16:28:21 2023
+Kernel:  AVX+FMA - auto-detect threads (12 CPU cores detected)
+
+Reading alignment file GlobalNCR_aligned_trimmed.fas ... Fasta format detected
+Alignment most likely contains DNA/RNA sequences
+WARNING: 307 sites contain only gaps or ambiguous characters.
+Alignment has 588 sequences with 29891 columns, 4092 distinct patterns
+441 parsimony-informative, 1080 singleton sites, 28370 constant sites
+                                             Gap/Ambiguity  Composition  p-value
+   1  India/TG-CCMB-X116/2020                        1.71%    passed     99.69%
+   2  Japan/IC-0090/2020                             1.06%    passed     99.97%
+   3  Wuhan/Hu-1/2019                                1.04%    passed     99.99%
+   4  Bahrain/920319237_S17_L001/2020                1.03%    passed     99.97%
+   5  Japan/IC-0095/2020                             1.03%    passed     99.97%
+   6  SaudiArabia/KAUST-RIYADH1243/2020              1.08%    passed    100.00%
+   7  Bahrain/023287015_S14_L001/2020                1.03%    passed    100.00%
+   8  Japan/IC-0092/2020                             1.04%    passed     99.98%
+   9  India/GJ-GBRC-412a/2020                        1.03%    passed     99.97%
+  10  India/MH-AFCO-15275/2020                       1.03%    passed    100.00%
+  11  SouthKorea/KCDC2741/2020                       1.03%    passed     99.99%
+  12  Bangladesh/BCSIR-NILMRC-381/2020               1.03%    passed     99.97%
+  13  SouthKorea/KCDC2777/2020                       1.03%    passed    100.00%
+  14  HongKong/VM20061555/2020                       1.03%    passed     99.99%
+  15  Indonesia/SB-74-FKUA/2020                      1.03%    passed     99.78%
+  16  Bangladesh/NGRI-R3-9/2020                      1.27%    passed     99.97%
+  17  SouthKorea/KDCA1384/2020                       1.03%    passed     99.99%
+  18  SouthKorea/KDCA0341/2020                       1.03%    passed     99.99%
+  19  SouthKorea/KDCA1397/2020                       1.34%    passed     99.95%
+  20  Maldives/MAV02981/2020                         1.03%    passed     99.98%
+  21  India/AS-INSACOG-CSIR-NEIST1-CIDIN0013/2020    1.03%    passed    100.00%
+  22  Japan/FJ294/2020                               1.03%    passed     99.99%
+  23  Indonesia/JA-GS-EIJK-RSRM-0172/2020            1.12%    passed     99.78%
+  24  SriLanka/KDU2564/2020                          1.03%    passed     99.98%
+  25  Philippines/PH-RITM-755/2020                   2.00%    passed     99.86%
+  26  India/KA-CS1029/2020                           1.03%    passed    100.00%
+  27  HongKong/HKU-201216-136/2020                   1.93%    passed     99.89%
+  28  Kyrgyzstan/ChVir-34176/2020                    1.03%    passed     99.98%
+  29  HongKong/WHP4688/2020                          1.03%    passed     99.99%
+  30  Kazakhstan/33496/2020                          1.03%    passed     99.98%
+  31  Oman/205036136/2020                            1.03%    passed    100.00%
+  32  India/GJ-GBRC66/2020                           1.05%    passed     99.99%
+  33  India/GJ-GBRC147/2020                          1.03%    passed    100.00%
+  34  India/TG-CCMB-L1452/2020                       1.03%    passed    100.00%
+  35  Japan/Donner32/2020                            1.03%    passed     99.99%
+  36  India/TG-CCMB-L1453/2020                       1.03%    passed    100.00%
+  37  India/GJ-GBRC134/2020                          1.03%    passed    100.00%
+  38  India/MP-DRDE-4624/2020                        1.06%    passed    100.00%
+  39  India/TG-CCMB-OM15/2020                        1.03%    passed    100.00%
+  40  India/OR-ILSCV29215/2020                       1.03%    passed    100.00%
+  41  India/OR-ILSCV17741/2020                       1.03%    passed     99.99%
+  42  SouthKorea/KCDC2660/2020                       1.03%    passed    100.00%
+  43  India/TG-CCMB-L1478/2020                       1.03%    passed    100.00%
+  44  Bahrain/090000572_S16_L001/2020                1.03%    passed     99.99%
+  45  Bangladesh/BARJ_CVASU_CTG_503/2020             1.03%    passed    100.00%
+  46  SouthKorea/CNUHV03-CA22/2020                   1.06%    passed     99.96%
+  47  SaudiArabia/KAUST-JEDDAH866/2020               1.03%    passed    100.00%
+  48  SaudiArabia/KAUST-JEDDAH886/2020               1.03%    passed    100.00%
+  49  SaudiArabia/KAUST-JEDDAH887/2020               1.03%    passed    100.00%
+  50  SaudiArabia/KAUST-MADINAH892/2020              1.03%    passed    100.00%
+  51  SaudiArabia/KAUST-MADINAH606/2020              1.03%    passed    100.00%
+  52  SouthKorea/KCDC2669/2020                       1.38%    passed     99.97%
+  53  SouthKorea/KCDC2661/2020                       1.36%    passed     99.97%
+  54  SaudiArabia/KAUST-MADINAH688/2020              1.03%    passed    100.00%
+  55  Japan/IC-0028/2020                             1.03%    passed    100.00%
+  56  Indonesia/JK-NIHRD-MI2851/2020                 1.03%    passed    100.00%
+  57  Pakistan/UN-UVAS-Lahore-I/2020                 1.03%    passed     99.98%
+  58  SouthKorea/KCDC2662/2020                       1.03%    passed     99.97%
+  59  Japan/PG-1684/2020                             1.03%    passed    100.00%
+  60  SaudiArabia/KAUST-MADINAH938/2020              1.03%    passed     99.99%
+  61  Japan/PG-7964/2020                             1.03%    passed     99.99%
+  62  SouthKorea/KCDC2668/2020                       1.20%    passed    100.00%
+  63  Japan/PG-2521/2020                             1.03%    passed    100.00%
+  64  UnitedArabEmirates/0687/2020                   1.03%    passed     99.98%
+  65  Japan/PG-2033/2020                             1.03%    passed     99.99%
+  66  UnitedArabEmirates/0653/2020                   1.03%    passed    100.00%
+  67  Japan/PG-2887/2020                             1.03%    passed     99.99%
+  68  Qatar/QA-WCMQ_FD18193844/2020                  1.03%    passed     99.99%
+  69  Qatar/QA-WCMQ_FD18272756/2020                  1.84%    passed     99.84%
+  70  Qatar/QA-WCMQ_FD18272760/2020                  1.68%    passed     99.94%
+  71  Oman/205048807/2020                            1.03%    passed     99.97%
+  72  Pakistan/JRCGR-KHI05/2020                      1.03%    passed    100.00%
+  73  Philippines/PH-RITM-0065/2020                  1.62%    passed     99.94%
+  74  Bangladesh/BCSIR-6/2020                        2.12%    passed     99.97%
+  75  UnitedArabEmirates/4240/2020                   1.03%    passed    100.00%
+  76  Qatar/QA-WCMQ_FD18272720/2020                  1.24%    passed     99.99%
+  77  HongKong/CUHK-NC9082/2020                      1.03%    passed     99.98%
+  78  Japan/OIPH14/2020                              1.03%    passed     99.99%
+  79  Israel/CVL_S13-1/2020                          1.03%    passed    100.00%
+  80  Qatar/QA-WCMQ_FD18272757/2020                  1.52%    passed     99.93%
+  81  Kyrgyzstan/NRL-842/2020                        2.18%    passed     99.25%
+  82  Bangladesh/BLRI_COVID-19_3292/2020             1.03%    passed     99.97%
+  83  Lebanon/LAU-R19/2020                           1.03%    passed    100.00%
+  84  Bangladesh/BLRI_COVID-19_2619/2020             1.03%    passed    100.00%
+  85  Mongolia/UB-9354/2020                          1.03%    passed    100.00%
+  86  SaudiArabia/KAUST-JEDDAH998/2020               1.03%    passed     99.99%
+  87  SaudiArabia/KAUST-JEDDAH996/2020               1.03%    passed     99.99%
+  88  India/GJ-GBRC301a/2020                         1.03%    passed     99.99%
+  89  Singapore/268nan/2020                          1.03%    passed    100.00%
+  90  India/KA-InStem-NCBS-0070/2020                 4.22%    passed     99.25%
+  91  India/TG-CCMB-M181/2020                        1.03%    passed    100.00%
+  92  India/OR-ILSCV35750/2020                       1.03%    passed    100.00%
+  93  SaudiArabia/KAUST-JEDDAH1028/2020              1.03%    passed    100.00%
+  94  SaudiArabia/KAUST-JEDDAH997/2020               1.03%    passed    100.00%
+  95  Bangladesh/CHRF-0030/2020                      1.03%    passed     99.98%
+  96  Singapore/592/2020                             1.03%    passed     99.99%
+  97  Beijing/IVDC-02-06/2020                        1.03%    passed    100.00%
+  98  Bahrain/920265546_S18_L001/2020                1.03%    passed     99.99%
+  99  Israel/CVL1196/2020                            1.03%    passed     99.97%
+ 100  SaudiArabia/KAUST-MADINAH1117/2020             1.09%    passed    100.00%
+ 101  Jordan/IR-ALSR-2578/2020                       1.03%    passed     99.99%
+ 102  Israel/CVL-n17916/2020                         1.03%    passed     99.99%
+ 103  SaudiArabia/KAUST-RIYADH1178/2020              1.03%    passed     99.99%
+ 104  SouthKorea/KCDC2688/2020                       1.16%    passed     99.99%
+ 105  Iraq/ICGEB-5T/2020                             1.44%    passed     99.97%
+ 106  SaudiArabia/KAUST-MADINAH1366/2020             1.03%    passed     99.98%
+ 107  Japan/IC-0192/2020                             1.06%    passed     99.90%
+ 108  SouthKorea/KCDC2679/2020                       1.57%    passed     99.92%
+ 109  Palestine/90/2020                              1.03%    passed     99.97%
+ 110  Indonesia/AC-NIHRD-PME4523/2020                1.40%    passed     99.97%
+ 111  Israel/CVL1130/2020                            1.03%    passed     99.99%
+ 112  India/CH-ICMR-15927/2020                       1.03%    passed     99.93%
+ 113  UnitedArabEmirates/1883/2020                   1.03%    passed     99.99%
+ 114  HongKong/HKU-201216-016/2020                   1.03%    passed     99.98%
+ 115  Qatar/QA-QU_07-1-E11/2020                      5.90%    passed     98.33%
+ 116  UnitedArabEmirates/0987/2020                   1.03%    passed    100.00%
+ 117  UnitedArabEmirates/0906/2020                   1.03%    passed     99.93%
+ 118  India/MH-ACTREC-215/2020                       1.03%    passed     99.99%
+ 119  India/KA-CS1016/2020                           1.49%    passed     99.97%
+ 120  UnitedArabEmirates/1012/2020                   1.03%    passed     99.98%
+ 121  Afghanistan/IMB07960/2020                      1.03%    passed     99.97%
+ 122  SouthKorea/KDCA0504/2020                       3.32%    passed     99.83%
+ 123  HongKong/HKPU-01166/2020                       1.76%    passed    100.00%
+ 124  UnitedArabEmirates/1995/2020                   1.03%    passed    100.00%
+ 125  UnitedArabEmirates/1015/2020                   1.03%    passed    100.00%
+ 126  Pakistan/JRCGR-KHI04/2020                      1.03%    passed    100.00%
+ 127  Bahrain/340249126/2020                         1.03%    passed    100.00%
+ 128  Qatar/QA-QU_07-2-E12/2020                      3.80%    passed     99.92%
+ 129  Qatar/QA-WCMQ_FD17462419/2020                  1.24%    passed     99.99%
+ 130  Qatar/QA-QU_07-1-F6/2020                       3.31%    passed     99.87%
+ 131  env/Liaoning/Dalian-IVDC-Pollock-03-06/2020    1.03%    passed    100.00%
+ 132  Qatar/QA-WCMQ_FD17462429/2020                  1.04%    passed     99.96%
+ 133  HongKong/CUHK-NC3763/2020                      1.03%    passed     99.98%
+ 134  India/DL-ILBS-17864/2020                       1.03%    passed     99.97%
+ 135  India/DL-ILBS-18118/2020                       1.03%    passed     99.95%
+ 136  Japan/TKY20009/2020                            1.03%    passed     99.99%
+ 137  Japan/FJ469/2020                               1.03%    passed     99.99%
+ 138  Lebanon/LAU-R298/2020                          1.03%    passed     99.96%
+ 139  Kazakhstan/KZY-CSP-9145_S40/2020               1.27%    passed     99.99%
+ 140  HongKong/HKU-200723-015/2020                   1.03%    passed     99.99%
+ 141  Singapore/775/2020                             1.03%    passed    100.00%
+ 142  India/GJ-GBRC338b/2020                         1.03%    passed     99.98%
+ 143  SouthKorea/KCDC2710/2020                       1.03%    passed     99.99%
+ 144  SouthKorea/KCDC2712/2020                       1.46%    passed     99.89%
+ 145  Japan/IC-0085/2020                             1.03%    passed     99.99%
+ 146  Japan/IC-0070/2020                             1.03%    passed     99.97%
+ 147  Japan/PG-6656/2020                             1.03%    passed     99.98%
+ 148  India/GJ-GBRC-377b/2020                        1.03%    passed     99.99%
+ 149  India/TG-CCMB-W887/2020                        1.73%    passed     99.98%
+ 150  UnitedArabEmirates/1789/2020                   1.03%    passed    100.00%
+ 151  Japan/IC-0083/2020                             1.03%    passed     99.98%
+ 152  Iran/Gilan-NIC189/2020                         1.03%    passed     99.98%
+ 153  Palestine/82/2020                              1.03%    passed     99.97%
+ 154  Qatar/QA-WCMQ_FD18190021/2020                  1.24%    passed     99.96%
+ 155  Japan/IC-0133/2020                             1.03%    passed    100.00%
+ 156  HongKong/HKPU-01499/2020                       1.03%    passed     99.99%
+ 157  India/PB-ICMR-26666/2020                       1.03%    passed     99.97%
+ 158  Qatar/QA-WCMQ_FD18190063/2020                  1.43%    passed     99.92%
+ 159  Qatar/QA-WCMQ_FD18190054/2020                  1.18%    passed     99.99%
+ 160  Qatar/QA-WCMQ_FD18190044/2020                  1.51%    passed     99.92%
+ 161  Israel/HMO-VL-226854/2020                      1.03%    passed     99.99%
+ 162  Iran/GRC-9842/2020                             1.17%    passed    100.00%
+ 163  UnitedArabEmirates/2002/2020                   1.03%    passed    100.00%
+ 164  UnitedArabEmirates/1776/2020                   1.03%    passed     99.98%
+ 165  India/KA-CS1049/2020                           1.07%    passed     99.99%
+ 166  India/AP-CS0341/2020                           2.02%    passed     99.95%
+ 167  India/AP-CS0375/2020                           1.53%    passed     99.97%
+ 168  Japan/PG-11727/2020                            1.03%    passed     99.99%
+ 169  India/AP-CS0367/2020                           1.91%    passed    100.00%
+ 170  Philippines/PH-RITM-0069/2020                  1.03%    passed    100.00%
+ 171  SouthKorea/KDCA1350/2020                       1.03%    passed    100.00%
+ 172  Japan/PG-4405/2020                             1.76%    passed     99.99%
+ 173  HongKong/HKPU-01305/2020                       1.03%    passed     99.99%
+ 174  Kyrgyzstan/ChVir-33625/2020                    1.03%    passed     99.99%
+ 175  India/AP-CS0361/2020                           1.30%    passed     99.93%
+ 176  Philippines/PH-RITM-728/2020                   1.03%    passed     99.99%
+ 177  Philippines/PH-RITM-692/2020                   5.51%    passed     81.63%
+ 178  Philippines/PH-RITM-733/2020                   1.20%    passed     99.98%
+ 179  SouthKorea/KDCA0186/2020                       1.59%    passed     99.99%
+ 180  SouthKorea/KDCA3538/2020                       1.03%    passed     99.99%
+ 181  India/AP-CS0370/2020                           1.90%    passed     99.98%
+ 182  SouthKorea/KDCA1352/2020                       1.03%    passed     99.99%
+ 183  India/GJ-GBRC153b/2020                         1.03%    passed    100.00%
+ 184  Thailand/63039985__2019/2020                   1.03%    passed    100.00%
+ 185  Lebanon/ML17_S53/2020                          1.03%    passed    100.00%
+ 186  Georgia/Tb-5727/2020                           1.03%    passed    100.00%
+ 187  SaudiArabia/KAUST-MADINAH396/2020              1.03%    passed     99.99%
+ 188  UnitedArabEmirates/L2004034680/2020            1.03%    passed    100.00%
+ 189  SriLanka/CDR1885/2020                          1.05%    passed    100.00%
+ 190  Kazakhstan/21399/2020                          1.03%    passed    100.00%
+ 191  Japan/IC-0025/2020                             1.03%    passed    100.00%
+ 192  India/TN-CCMB-C9/2020                          1.03%    passed    100.00%
+ 193  Japan/PG-1099/2020                             1.03%    passed    100.00%
+ 194  Japan/PG-1103/2020                             1.03%    passed    100.00%
+ 195  Japan/PG-2974/2020                             1.03%    passed    100.00%
+ 196  UnitedArabEmirates/BTC-4078/2020               1.03%    passed    100.00%
+ 197  Maldives/MAV00052/2020                         1.03%    passed     99.99%
+ 198  SaudiArabia/KAUST-JEDDAH919/2020               1.03%    passed    100.00%
+ 199  Israel/2046434/2020                            1.03%    passed     99.99%
+ 200  Mongolia/UB-8455/2020                          1.03%    passed    100.00%
+ 201  Singapore/232/2020                             1.03%    passed     99.99%
+ 202  Taiwan/TSGH-22/2020                            1.03%    passed    100.00%
+ 203  Taiwan/TSGH-23/2020                            1.03%    passed    100.00%
+ 204  Thailand/Bangkok-0074/2020                     1.12%    passed    100.00%
+ 205  Israel/2047883/2020                            1.04%    passed     99.99%
+ 206  Israel/13077723/2020                           1.74%    passed     99.73%
+ 207  Singapore/421/2020                             2.23%    passed     99.68%
+ 208  Japan/PG-0543/2020                             1.03%    passed    100.00%
+ 209  SaudiArabia/KAUST-JEDDAH922/2020               1.03%    passed    100.00%
+ 210  Oman/205029065/2020                            8.73%    passed     34.47%
+ 211  Malaysia/3611/2020                             1.03%    passed    100.00%
+ 212  Israel/CVL-n-6744/2020                         1.03%    passed     99.99%
+ 213  SaudiArabia/KAUST-JEDDAH479/2020               1.03%    passed     99.99%
+ 214  SaudiArabia/KAUST-Madinah211/2020              1.03%    passed    100.00%
+ 215  Vietnam/VNHN_3913/2020                         1.03%    passed    100.00%
+ 216  Thailand/Bangkok-0079/2020                     1.61%    passed     99.86%
+ 217  Bahrain/BAH-24/2020                            2.18%    passed     99.69%
+ 218  HongKong/HKU-200723-091/2020                   3.81%    passed     99.61%
+ 219  Singapore/938/2020                             1.03%    passed    100.00%
+ 220  Singapore/245/2020                             2.58%    passed     99.91%
+ 221  Japan/PG-1360/2020                             1.03%    passed     99.99%
+ 222  Thailand/Bangkok-CONI-0099/2020                5.04%    passed     97.70%
+ 223  Japan/NGY-NNH-027/2020                         1.03%    passed     99.99%
+ 224  Singapore/937/2020                             1.03%    passed    100.00%
+ 225  India/DL-ILBS-4871T/2020                       1.03%    passed    100.00%
+ 226  SaudiArabia/KAUST-MAKKAH1525/2020              1.03%    passed    100.00%
+ 227  Singapore/1160/2020                            1.03%    passed     99.99%
+ 228  Japan/PG-1251/2020                             1.03%    passed     99.99%
+ 229  Japan/NGY-NNH-026/2020                         1.03%    passed     99.99%
+ 230  Japan/PG-1639/2020                             1.03%    passed    100.00%
+ 231  Japan/PG-1310/2020                             1.03%    passed    100.00%
+ 232  India/DL-ILBS-9062D/2020                       1.03%    passed    100.00%
+ 233  UnitedArabEmirates/L920634731/2020             1.03%    passed    100.00%
+ 234  Japan/PG-10519/2020                            1.03%    passed     99.98%
+ 235  Japan/PG-5655/2020                             1.29%    passed    100.00%
+ 236  Japan/PG-6979/2020                             1.03%    passed     99.99%
+ 237  Japan/FHU-FP9532-02-1/2020                     1.03%    passed    100.00%
+ 238  Japan/PG-2148/2020                             1.03%    passed    100.00%
+ 239  Japan/PG-2959/2020                             1.03%    passed    100.00%
+ 240  Thailand/CU-SI2011649-NST/2020                 1.03%    passed    100.00%
+ 241  Thailand/CU-SI2012575-NST/2020                 1.03%    passed    100.00%
+ 242  Thailand/CU-SI2012946-NT/2020                  1.03%    passed    100.00%
+ 243  Malaysia/UNIMAS-0172/2020                      1.03%    passed    100.00%
+ 244  Lebanon/MD5_S5/2020                            1.03%    passed    100.00%
+ 245  Qatar/QA-QU_02-1-4/2020                        1.44%    passed     99.94%
+ 246  Georgia/MM001597/2020                          1.03%    passed    100.00%
+ 247  HongKong/CUHK-NC1663/2020                      2.00%    passed     99.94%
+ 248  HongKong/HKPU-00721/2020                       1.91%    passed     99.93%
+ 249  Maldives/MAV00499/2020                         1.03%    passed     99.99%
+ 250  Malaysia/TIDREC-64-Hu/2020                     1.03%    passed    100.00%
+ 251  SouthKorea/KCDC06/2020                         1.03%    passed     99.99%
+ 252  Mongolia/UB-5183/2020                          1.03%    passed    100.00%
+ 253  Thailand/SI202620-NT/2020                      1.03%    passed     99.99%
+ 254  HongKong/HKU-001a/2020                         1.03%    passed     99.99%
+ 255  SouthKorea/KCDC03/2020                         1.03%    passed     99.99%
+ 256  Guangzhou/GZMU0024/2020                        1.03%    passed     99.99%
+ 257  Japan/PG-0373/2020                             1.03%    passed    100.00%
+ 258  Guangxi/NAN.20-8/2020                          1.03%    passed    100.00%
+ 259  Singapore/894/2020                             1.03%    passed    100.00%
+ 260  Senegal/1966/2020                              1.03%    passed    100.00%
+ 261  Senegal/6430/2020                              1.08%    passed    100.00%
+ 262  Anhui/667/2020                                 1.03%    passed     99.99%
+ 263  Israel/CVL-n896/2020                           1.03%    passed    100.00%
+ 264  Nigeria/KW298-CV48/2020                        1.03%    passed    100.00%
+ 265  Mali/M002704/2020                              1.03%    passed     99.99%
+ 266  Senegal/62368/2020                             1.03%    passed    100.00%
+ 267  DRC/214/2020                                   1.03%    passed    100.00%
+ 268  SouthAfrica/KRISP-0149/2020                    1.03%    passed    100.00%
+ 269  Senegal/087/2020                               1.03%    passed    100.00%
+ 270  Morocco/refstage1/2020                         1.03%    passed    100.00%
+ 271  Nigeria/Lagos01/2020                           2.17%    passed     98.78%
+ 272  DRC/248/2020                                   1.03%    passed    100.00%
+ 273  SouthAfrica/KRISP-012/2020                     1.12%    passed     99.99%
+ 274  DRC/1398/2020                                  1.33%    passed     99.99%
+ 275  DRC/3451/2020                                  1.94%    passed     99.99%
+ 276  Ghana/1659_S14/2020                            5.08%    passed     99.74%
+ 277  Uganda/UG010/2020                              1.03%    passed     99.99%
+ 278  Uganda/UG017/2020                              1.03%    passed     99.99%
+ 279  Kenya/C3194/2020                               3.71%    passed     97.20%
+ 280  SouthAfrica/KRISP-0115/2020                    1.03%    passed    100.00%
+ 281  Kenya/NIC_196/2020                             5.37%    passed     99.90%
+ 282  Morocco/6889/2020                              1.86%    passed     99.75%
+ 283  SouthAfrica/KRISP-0144/2020                    1.03%    passed    100.00%
+ 284  Morocco/AZ183/2020                             1.03%    passed     99.99%
+ 285  Senegal/65030/2020                             1.03%    passed     99.99%
+ 286  SouthAfrica/KRISP-0279/2020                    3.47%    passed     99.87%
+ 287  Senegal/65481/2020                             3.52%    passed     99.30%
+ 288  SouthAfrica/KRISP-0368/2020                    1.03%    passed    100.00%
+ 289  Nigeria/ON507-CV44/2020                        1.13%    passed    100.00%
+ 290  Senegal/9439/2020                              1.04%    passed    100.00%
+ 291  SouthAfrica/KRISP-0300/2020                    1.03%    passed    100.00%
+ 292  Benin/501/2020                                 1.03%    passed    100.00%
+ 293  SouthAfrica/R10720/2020                        4.07%    passed     99.66%
+ 294  SouthAfrica/R10517/2020                        4.05%    passed     99.73%
+ 295  Egypt/CUNCI-HGC013/2020                        1.03%    passed     99.99%
+ 296  Egypt/CUNCI-HGC6I010/2020                      1.03%    passed    100.00%
+ 297  SouthAfrica/KRISP-0137/2020                    1.03%    passed    100.00%
+ 298  SouthAfrica/KRISP-0179/2020                    1.03%    passed    100.00%
+ 299  Nigeria/OY260-CV55/2020                        1.03%    passed    100.00%
+ 300  DRC/1516/2020                                  1.03%    passed    100.00%
+ 301  Egypt/CUNCI-HGC6I016/2020                      1.11%    passed     99.98%
+ 302  DRC/80/2020                                    1.08%    passed    100.00%
+ 303  Egypt/CUNCI-HGC6I031/2020                      1.08%    passed     99.99%
+ 304  DRC/431/2020                                   1.03%    passed    100.00%
+ 305  DRC/523/2020                                   1.03%    passed     99.99%
+ 306  SouthAfrica/KRISP-0267/2020                    2.43%    passed     99.92%
+ 307  SouthAfrica/KRISP-0266/2020                    1.03%    passed     99.99%
+ 308  DRC/16143/2020                                 3.86%    passed     99.58%
+ 309  SouthAfrica/NHLS-UCT-GS-0084/2020              1.14%    passed    100.00%
+ 310  Coted-Ivoire/BKE0117/2020                      1.05%    passed     99.99%
+ 311  SouthAfrica/NHLS-UCT-GP-5742/2020              1.03%    passed    100.00%
+ 312  BurkinaFaso/2-012/2020                         1.04%    passed    100.00%
+ 313  SouthAfrica/NHLS-UCT-GS-0038/2020              7.32%    passed     97.89%
+ 314  Congo/UKT-009/2020                             1.03%    passed    100.00%
+ 315  SierraLeone/KGH-G-8549/2020                    1.03%    passed    100.00%
+ 316  SouthAfrica/KRISP-0409/2020                    1.03%    passed     99.98%
+ 317  DRC/7386/2020                                  4.56%    passed     98.75%
+ 318  Ghana/84182_S43/2020                           2.53%    passed     99.87%
+ 319  SouthAfrica/KRISP-K002466/2020                 1.03%    passed    100.00%
+ 320  Gambia/NPHL-1209/2020                          2.70%    passed     99.98%
+ 321  Reunion/RUN-PIMIT2/2020                        1.03%    passed    100.00%
+ 322  DRC/11648/2020                                 1.88%    passed    100.00%
+ 323  Botswana/BOT0455/2020                          1.03%    passed    100.00%
+ 324  Kenya/C6255/2020                               2.09%    passed     99.80%
+ 325  Kenya/C4195/2020                               2.02%    passed     99.62%
+ 326  Kenya/C7605/2020                               1.98%    passed     99.88%
+ 327  Kenya/C571/2020                                1.03%    passed     99.99%
+ 328  Congo/UKT-005/2020                             1.47%    passed    100.00%
+ 329  Kenya/C1983/2020                               7.84%    passed     96.61%
+ 330  Coted-Ivoire/BKE0165/2020                      1.05%    passed     99.99%
+ 331  DRC/16145/2020                                 3.87%    passed     99.36%
+ 332  Coted-Ivoire/BKE0247/2020                      1.04%    passed     99.98%
+ 333  Coted-Ivoire/BKE0125/2020                      1.06%    passed     99.99%
+ 334  Ghana/UHAS-H009/2020                           3.69%    passed     99.57%
+ 335  DRC/D09-0684/2020                              1.03%    passed     99.98%
+ 336  Zimbabwe/ZW-29/2020                            1.52%    passed     99.99%
+ 337  SouthAfrica/NHLS-UCT-GS-0041/2020              2.47%    passed     99.57%
+ 338  EquatorialGuinea/8971/2020                     2.33%    passed     99.95%
+ 339  EquatorialGuinea/253/2020                      3.27%    passed     99.88%
+ 340  Ghana/UHAS-G541/2020                           7.57%    passed     94.32%
+ 341  BurkinaFaso/0777/2020                          2.65%    passed     99.23%
+ 342  SouthAfrica/NHLS-UCT-GS-3097/2020              1.03%    passed    100.00%
+ 343  Gambia/GC19-1983/2020                          1.03%    passed     99.99%
+ 344  Coted-Ivoire/BKE0042/2020                      1.04%    passed     99.99%
+ 345  BurkinaFaso/2-009/2020                         1.04%    passed    100.00%
+ 346  SouthAfrica/NHLS-UCT-GP-5223/2020              3.65%    passed     96.53%
+ 347  Ghana/84162_S45/2020                           3.49%    passed     99.79%
+ 348  SierraLeone/KGH-G-8607/2020                    1.03%    passed    100.00%
+ 349  Ghana/34927_S20/2020                           2.03%    passed     99.96%
+ 350  Gambia/NPHL-1208/2020                          1.90%    passed     99.95%
+ 351  DRC/10242/2020                                 1.36%    passed     99.99%
+ 352  SouthAfrica/NHLS-UCT-GP-5156/2020              1.24%    passed     99.99%
+ 353  Nigeria/OY633-CV189/2020                       1.03%    passed    100.00%
+ 354  DRC/10731/2020                                 5.27%    passed     98.36%
+ 355  DRC/11477/2020                                 1.92%    passed     99.96%
+ 356  Mali/UCRC-31/2020                              1.03%    passed    100.00%
+ 357  Zambia/ZMB-17192/2020                          3.45%    passed     99.64%
+ 358  Zambia/ZMB-26663/2020                          1.03%    passed    100.00%
+ 359  Nigeria/LA-CV259/2020                          1.03%    passed    100.00%
+ 360  SouthAfrica/NHLS-UCT-GP-5164/2020              1.03%    passed    100.00%
+ 361  Zambia/ZMB-42383/2020                          1.03%    passed     99.98%
+ 362  Zambia/ZMB-31263/2020                          1.03%    passed    100.00%
+ 363  Egypt/CPHL-NRC-14/2020                         2.94%    passed     99.40%
+ 364  Zambia/ZMB-42393/2020                          1.03%    passed     99.97%
+ 365  Egypt/NRC-6099/2020                            1.36%    passed     99.88%
+ 366  Egypt/NRC-5892/2020                            1.03%    passed     99.99%
+ 367  Guinea/Conakry_IPG002/2020                     8.60%    passed     88.62%
+ 368  GuineaBissau/52LNSPGB/2020                     2.01%    passed     99.77%
+ 369  Morocco/ouar384/2020                           1.03%    passed    100.00%
+ 370  SouthAfrica/NICD-N00179/2020                   5.31%    passed     95.31%
+ 371  Tunisia/2909/2020                              1.03%    passed    100.00%
+ 372  Nigeria/LA-CV256/2020                          1.03%    passed    100.00%
+ 373  Nigeria/FC-CV238/2020                          1.03%    passed     99.98%
+ 374  Cameroon/CV406/2020                            1.03%    passed     99.97%
+ 375  Uganda/UG027/2020                              1.03%    passed    100.00%
+ 376  Kenya/C14722/2020                              6.80%    passed     99.43%
+ 377  SouthAfrica/NHLS-UCT-GP-6037/2020              1.65%    passed    100.00%
+ 378  SouthAfrica/NHLS-UCT-GS-2420/2020              1.35%    passed     99.99%
+ 379  Zambia/ZMB-30509/2020                          1.03%    passed     99.97%
+ 380  Uganda/UG048/2020                              1.03%    passed    100.00%
+ 381  Kenya/K10186/2020                              3.73%    passed     98.46%
+ 382  Kenya/Cov-20-06-1152/2020                      1.03%    passed    100.00%
+ 383  Zambia/ZMB-27664/2020                          1.03%    passed    100.00%
+ 384  Kenya/K10221/2020                              7.47%    passed     98.46%
+ 385  Zambia/ZMB-30834/2020                          1.03%    passed    100.00%
+ 386  Togo/BMC-4-20/2020                             1.03%    passed     99.99%
+ 387  Niger/55-20/2020                               1.04%    passed     99.99%
+ 388  Niger/MI-03/2020                               2.32%    passed     99.87%
+ 389  Togo/BMC-50-20/2020                            1.04%    passed    100.00%
+ 390  DRC/6241/2020                                  5.56%    passed     97.60%
+ 391  Djibouti/CNSS00187-IHU1031243455/2020          1.07%    passed    100.00%
+ 392  Kenya/MAL-5044/2020                            1.03%    passed    100.00%
+ 393  Djibouti/CNSS00115-IHU1031243441/2020          1.03%    passed    100.00%
+ 394  SouthAfrica/NICD-N00165/2020                   6.85%    passed     98.87%
+ 395  Kenya/C24022/2020                              6.98%    passed     97.73%
+ 396  Egypt/NRC-5767/2020                            1.03%    passed     99.99%
+ 397  Rwanda/NRLNAT2009/2020                         1.03%    passed     99.97%
+ 398  Kenya/BUS-406/2020                             1.03%    passed     99.93%
+ 399  Togo/BMC-394-20/2020                           1.03%    passed     99.99%
+ 400  Madagascar/IPM-11893/2020                      3.47%    passed     99.67%
+ 401  Niger/ZR-306/2020                              1.90%    passed     99.98%
+ 402  Cameroon/CV411/2020                            1.03%    passed     99.98%
+ 403  Sudan/N6751/2020                               1.09%    passed     99.97%
+ 404  Egypt/NRC-5962/2020                            1.39%    passed     99.95%
+ 405  Tunisia/TUN_ADAGE_EZ224/2020                   1.03%    passed    100.00%
+ 406  SouthAfrica/Tygerberg_115/2020                 3.93%    passed     94.82%
+ 407  SouthAfrica/NICD-N19705/2020                   1.03%    passed    100.00%
+ 408  Tunisia/TUN_ADAGE_EZ432/2020                   1.04%    passed     99.97%
+ 409  Madagascar/IPM-11417/2020                      1.71%    passed     99.92%
+ 410  Madagascar/IPM-14754/2020                      3.63%    passed     99.62%
+ 411  Djibouti/NAMRU3_CL2/2020                       1.03%    passed    100.00%
+ 412  Madagascar/IPM-10687/2020                      1.86%    passed     99.98%
+ 413  Madagascar/IPM-17845/2020                      7.14%    passed     92.90%
+ 414  Senegal/82/2020                                1.03%    passed    100.00%
+ 415  Djibouti/NAMRU3_003/2020                       6.69%    passed     99.58%
+ 416  Libya/MZ054862/2020                            1.21%    passed     99.98%
+ 417  Djibouti/NAMRU3_004/2020                       3.85%    passed     99.93%
+ 418  Kenya/SS2765/2020                              2.02%    passed     99.98%
+ 419  Senegal/6830/2020                              1.67%    passed     99.96%
+ 420  Senegal/48776/2020                             1.13%    passed     99.99%
+ 421  SouthAfrica/Tygerberg_274/2020                 2.92%    passed     97.36%
+ 422  SouthAfrica/Tygerberg_210/2020                 3.23%    passed     97.08%
+ 423  SouthAfrica/Tygerberg_233/2020                 1.92%    passed     99.95%
+ 424  BurkinaFaso/CV1772/2020                        1.49%    passed     99.79%
+ 425  SouthAfrica/Tygerberg_113/2020                 1.91%    passed     99.82%
+ 426  BurkinaFaso/CV1719/2020                        1.61%    passed     99.96%
+ 427  BurkinaFaso/CV1770/2020                        1.03%    passed     99.99%
+ 428  SouthAfrica/Tygerberg_260/2020                 1.03%    passed    100.00%
+ 429  Sudan/N6777/2020                               3.57%    passed     98.06%
+ 430  DRC/16146/2020                                 5.55%    passed     96.52%
+ 431  Sudan/N6758/2020                               1.09%    passed     99.99%
+ 432  SouthAfrica/Tygerberg_259/2020                 1.91%    passed     99.76%
+ 433  Senegal/2376/2020                              4.65%    passed     98.45%
+ 434  SouthAfrica/Tygerberg_242/2020                 1.92%    passed     99.78%
+ 435  DRC/1176/2020                                  7.49%    passed     98.88%
+ 436  DRC/411/2020                                   6.24%    passed     98.89%
+ 437  Sudan/N6776/2020                               1.41%    passed     99.78%
+ 438  Gabon/K0118/2020                               1.03%    passed    100.00%
+ 439  Gabon/L0696/2020                               1.03%    passed    100.00%
+ 440  SouthAfrica/NHLS-UCT-GS-3666/2020              1.03%    passed    100.00%
+ 441  SouthAfrica/NHLS-UCT-GS-4570/2020              1.03%    passed     99.99%
+ 442  Gabon/K0006/2020                               1.03%    passed     99.99%
+ 443  Algeria/11814/2020                             1.03%    passed    100.00%
+ 444  SouthAfrica/NHLS-UCT-GS-4744/2020              1.03%    passed     99.98%
+ 445  Algeria/12031/2020                             1.03%    passed     99.98%
+ 446  Senegal/70530/2020                             1.03%    passed     99.99%
+ 447  DRC/ILRI_COVM00373/2020                        6.96%    passed     86.86%
+ 448  Senegal/70952/2020                             1.03%    passed     99.99%
+ 449  Gabon/101L/2020                                1.19%    passed     99.95%
+ 450  Gabon/62/2020                                  2.57%    passed     99.70%
+ 451  Gabon/557L/2020                                1.03%    passed    100.00%
+ 452  Malawi/COM-SEQ6805/2020                        2.01%    passed     99.92%
+ 453  Malawi/COM-SEQ6572/2020                        2.53%    passed     99.94%
+ 454  Malawi/COM-SEQ6103/2020                        1.03%    passed    100.00%
+ 455  Cameroon/R040/2020                             1.03%    passed     99.97%
+ 456  SouthAfrica/KRISP-K002712/2020                 1.03%    passed    100.00%
+ 457  Gambia/GC19-3792/2020                          1.03%    passed    100.00%
+ 458  SouthAfrica/KRISP-K002576/2020                 1.03%    passed    100.00%
+ 459  SouthAfrica/KRISP-K002398/2020                 1.03%    passed     99.99%
+ 460  SouthAfrica/KRISP-0393/2020                    1.54%    passed     99.99%
+ 461  SouthAfrica/KRISP-K001355/2020                 1.03%    passed    100.00%
+ 462  Egypt/CUNCI-7I028/2020                         1.03%    passed    100.00%
+ 463  SouthAfrica/LR00063/2020                       3.27%    passed     99.54%
+ 464  Gambia/NPHL-1258/2020                          1.03%    passed    100.00%
+ 465  SouthAfrica/KRISP-K001092/2020                 1.03%    passed    100.00%
+ 466  Gambia/GC192812/2020                           1.03%    passed    100.00%
+ 467  Gambia/GC19-3165/2020                          1.03%    passed    100.00%
+ 468  SouthAfrica/KRISP-K001319/2020                 1.03%    passed     99.99%
+ 469  Egypt/CUNCI-HGC7I02/2020                       1.03%    passed     99.99%
+ 470  SouthAfrica/KRISP-K002693/2020                 1.03%    passed     99.99%
+ 471  Coted-Ivoire/BKE0557-bc9/2020                  5.48%    passed     99.60%
+ 472  Zimbabwe/ZW-16394/2020                         1.03%    passed     99.99%
+ 473  Egypt/CCHE57357-A-48/2020                      1.03%    passed     99.93%
+ 474  Zimbabwe/ZW-15930/2020                         1.04%    passed    100.00%
+ 475  Zambia/ZMB-38729/2020                          3.74%    passed     73.64%
+ 476  Madagascar/IPM-24673/2020                      1.16%    passed     99.99%
+ 477  Madagascar/IPM-24597/2020                      1.82%    passed     99.98%
+ 478  Mozambique/KRISP-MZ158905/2020                 1.03%    passed     99.98%
+ 479  Guinea/Conakry_IPG7133/2020                    8.96%    passed     91.31%
+ 480  Congo/UKT-014/2020                             1.18%    passed     99.98%
+ 481  SouthAfrica/NHLS-UCT-GS-0289/2020              2.28%    passed     99.64%
+ 482  EquatorialGuinea/28974/2020                    1.71%    passed     99.96%
+ 483  Mozambique/KRISP-MZ154276/2020                 6.75%    passed     97.95%
+ 484  Nigeria/AK-CV317/2020                          1.67%    passed     99.83%
+ 485  Ghana/WACCBIP-GS27/2020                        1.03%    passed    100.00%
+ 486  Kenya/C37981/2020                              3.46%    passed     99.20%
+ 487  Nigeria/AK-CV324/2020                          1.03%    passed    100.00%
+ 488  Ghana/WACCBIP-GS04/2020                        1.04%    passed    100.00%
+ 489  Rwanda/NRLNAT2056/2020                         1.03%    passed     99.99%
+ 490  Zambia/ZMB-33949/2020                          1.03%    passed     99.99%
+ 491  Zambia/ZMB-34701/2020                          1.05%    passed     99.99%
+ 492  Somalia/CV1159/2020                            1.07%    passed     99.98%
+ 493  Zambia/ZMB-37076/2020                          1.04%    passed     99.97%
+ 494  Togo/BMC-27079-20/2020                         1.03%    passed    100.00%
+ 495  BurkinaFaso/2-032-1197/2020                    1.77%    passed     99.90%
+ 496  Zimbabwe/ZW-16502/2020                         1.03%    passed    100.00%
+ 497  Madagascar/IPM-21175/2020                      8.88%    passed     88.08%
+ 498  Ghana/WACCBIP-GS183/2020                       1.04%    passed    100.00%
+ 499  Senegal/SN-MBO-20-1194/2020                    1.25%    passed     99.96%
+ 500  Zambia/ZMB-32059/2020                          1.03%    passed     99.99%
+ 501  Madagascar/IPM-21245/2020                      4.20%    passed     98.88%
+ 502  Morocco/HMIMV-5N/2020                          1.03%    passed    100.00%
+ 503  Niger/7322/2020                                3.80%    passed     98.37%
+ 504  Ghana/WACCBIP-GS28/2020                        1.04%    passed     99.99%
+ 505  Togo/BMC-27062-20/2020                         1.03%    passed     99.98%
+ 506  Nigeria/AK-CV272/2020                          1.03%    passed     99.99%
+ 507  Algeria/G35155-8850/2020                       1.03%    passed    100.00%
+ 508  Madagascar/IPM-24500/2020                      5.28%    passed     97.18%
+ 509  BurkinaFaso/CV1754/2020                        1.21%    passed    100.00%
+ 510  SouthAfrica/NCV1476/2020                       1.03%    passed     99.99%
+ 511  SouthAfrica/NICD-N19181/2020                   1.03%    passed    100.00%
+ 512  Kenya/C32958/2020                              7.35%    passed     95.82%
+ 513  Guinea/LFHVG-G0445/2020                        1.03%    passed     99.99%
+ 514  Egypt/NRC-6231/2020                            2.02%    passed     99.54%
+ 515  Senegal/91048/2020                             1.16%    passed     99.99%
+ 516  Philippines/PGC01/2020                         3.37%    passed     98.87%
+ 517  Philippines/PGC03/2020                         1.03%    passed    100.00%
+ 518  Philippines/PGC06/2020                         1.03%    passed    100.00%
+ 519  Philippines/PGC04/2020                         2.10%    passed     99.98%
+ 520  Philippines/PH-RITM-678/2020                   3.81%    passed     99.11%
+ 521  Philippines/PGC02/2020                         1.17%    passed     99.99%
+ 522  Philippines/PH-RITM-676/2020                   1.75%    passed     99.99%
+ 523  Philippines/PGC05/2020                         3.52%    passed     89.52%
+ 524  Philippines/PH-RITM-682/2020                   4.69%    passed     98.56%
+ 525  Philippines/PH-RITM-687/2020                   4.24%    passed     94.90%
+ 526  Philippines/PH-RITM-686/2020                   2.37%    passed     99.45%
+ 527  Philippines/PH-RITM-688/2020                   3.70%    passed     96.78%
+ 528  Philippines/PH-RITM-710/2020                   1.04%    passed    100.00%
+ 529  Philippines/PH-RITM-724/2020                   2.77%    passed     99.79%
+ 530  Philippines/PH-RITM-685/2020                   2.31%    passed     99.79%
+ 531  Philippines/PH-RITM-725/2020                   2.48%    passed     99.86%
+ 532  Philippines/PH-RITM-742/2020                   1.24%    passed    100.00%
+ 533  Philippines/PH-RITM-732/2020                   3.49%    passed     99.17%
+ 534  Philippines/PH-RITM-743/2020                   1.86%    passed     99.99%
+ 535  Philippines/PH-RITM-736/2020                   4.01%    passed     99.50%
+ 536  Philippines/PH-RITM-745/2020                   2.82%    passed     99.89%
+ 537  Philippines/PH-RITM-750/2020                   2.79%    passed     99.87%
+ 538  Philippines/PH-RITM-746/2020                   2.78%    passed     99.73%
+ 539  Philippines/PH-RITM-751/2020                   4.20%    passed     99.02%
+ 540  Philippines/PH-RITM-747/2020                   2.69%    passed     99.83%
+ 541  Philippines/PH-RITM-760/2020                   2.14%    passed     99.92%
+ 542  Philippines/PH-RITM-753/2020                   1.87%    passed     99.99%
+ 543  Philippines/PH-RITM-756/2020                   1.87%    passed     99.99%
+ 544  Philippines/PH-RITM-761/2020                   1.29%    passed     99.96%
+ 545  Philippines/PH-RITM-757/2020                   2.46%    passed     99.46%
+ 546  Philippines/PH-RITM-764/2020                   3.55%    passed     98.99%
+ 547  Philippines/PH-RITM-765/2020                   2.69%    passed     99.88%
+ 548  Philippines/PH-RITM-767/2020                   1.03%    passed     99.99%
+ 549  Philippines/PH-RITM-382/2020                   4.72%    passed     95.07%
+ 550  Philippines/PH-RITM-768/2020                   1.87%    passed     99.99%
+ 551  Philippines/PH-RITM-0064/2020                  1.10%    passed     99.98%
+ 552  Philippines/PH-RITM-0055/2020                  1.03%    passed    100.00%
+ 553  Philippines/PH-RITM-0056/2020                  1.03%    passed    100.00%
+ 554  Philippines/PH-RITM-0068/2020                  1.03%    passed     99.99%
+ 555  Philippines/PH-RITM-0057/2020                  1.03%    passed    100.00%
+ 556  Philippines/PH-RITM-0062/2020                  1.03%    passed    100.00%
+ 557  Philippines/PH-RITM-0074/2020                  1.03%    passed     99.99%
+ 558  Philippines/PH-RITM-0078/2020                  1.03%    passed    100.00%
+ 559  Philippines/PH-RITM-0066/2020                  1.13%    passed     99.99%
+ 560  Philippines/PH-RITM-0072/2020                  2.01%    passed     99.99%
+ 561  Philippines/PH-RITM-0112/2020                  1.04%    passed    100.00%
+ 562  Philippines/PH-RITM-0077/2020                  1.03%    passed    100.00%
+ 563  Philippines/PH-RITM-548/2020                   2.08%    passed     99.78%
+ 564  Philippines/PH-RITM-552/2020                   1.03%    passed     99.99%
+ 565  Philippines/PH-RITM-546/2020                   1.03%    passed    100.00%
+ 566  MT919770                                       1.03%    passed     99.99%
+ 567  Philippines/PH-RITM-557/2020                   2.10%    passed     99.24%
+ 568  MT919773                                       1.03%    passed     99.99%
+ 569  Philippines/PH-RITM-547/2020                   1.74%    passed     99.85%
+ 570  Philippines/PH-RITM-553/2020                   2.02%    passed     99.95%
+ 571  MT919768                                       1.03%    passed    100.00%
+ 572  MT919769                                       1.03%    passed     99.99%
+ 573  MT919772                                       1.03%    passed    100.00%
+ 574  MT919771                                       1.03%    passed     99.97%
+ 575  MT919776                                       1.03%    passed     99.97%
+ 576  MT919774                                       1.03%    passed     99.99%
+ 577  MT919778                                       1.03%    passed     99.97%
+ 578  MT919781                                       1.03%    passed     99.99%
+ 579  MT919782                                       1.04%    passed     99.98%
+ 580  MT919779                                       1.03%    passed    100.00%
+ 581  MT919783                                       1.03%    passed    100.00%
+ 582  MT919775                                       1.03%    passed     99.98%
+ 583  MT919777                                       1.10%    passed     99.93%
+ 584  MT919785                                       1.03%    passed     99.99%
+ 585  MT919788                                       1.03%    passed    100.00%
+ 586  MT919787                                       1.03%    passed     99.99%
+ 587  MT919786                                       1.03%    passed     99.98%
+ 588  MT919789                                       1.03%    passed    100.00%
+****  TOTAL                                          1.68%  0 sequences failed composition chi2 test (p-value<5%; df=3)
+NOTE: India/OR-ILSCV29215/2020 is identical to India/KA-CS1029/2020 but kept for subsequent analysis
+NOTE: SaudiArabia/KAUST-JEDDAH1028/2020 is identical to SaudiArabia/KAUST-JEDDAH886/2020 but kept for subsequent analysis
+NOTE: SaudiArabia/KAUST-MADINAH892/2020 is identical to SaudiArabia/KAUST-JEDDAH887/2020 but kept for subsequent analysis
+NOTE: Japan/FJ469/2020 is identical to Japan/PG-7964/2020 but kept for subsequent analysis
+NOTE: Qatar/QA-WCMQ_FD17462419/2020 is identical to Qatar/QA-WCMQ_FD18272720/2020 but kept for subsequent analysis
+NOTE: Japan/PG-0543/2020 is identical to Singapore/268nan/2020 but kept for subsequent analysis
+NOTE: Palestine/82/2020 is identical to Palestine/90/2020 but kept for subsequent analysis
+NOTE: Japan/PG-1103/2020 is identical to Japan/PG-1099/2020 but kept for subsequent analysis
+NOTE: Japan/PG-2959/2020 is identical to Japan/PG-2974/2020 but kept for subsequent analysis
+NOTE: Maldives/MAV00499/2020 is identical to Maldives/MAV00052/2020 but kept for subsequent analysis
+NOTE: Thailand/CU-SI2012946-NT/2020 is identical to Taiwan/TSGH-23/2020 but kept for subsequent analysis
+NOTE: SouthKorea/KCDC06/2020 is identical to Japan/PG-1251/2020 but kept for subsequent analysis
+NOTE: Senegal/82/2020 is identical to Senegal/087/2020 but kept for subsequent analysis
+NOTE: SouthAfrica/NHLS-UCT-GS-3097/2020 is identical to SouthAfrica/NHLS-UCT-GP-5742/2020 but kept for subsequent analysis
+NOTE: Gambia/GC192812/2020 is identical to Gambia/GC19-3792/2020 but kept for subsequent analysis
+NOTE: Philippines/PH-RITM-756/2020 is identical to Philippines/PH-RITM-753/2020 but kept for subsequent analysis
+NOTE: MT919769 is identical to MT919773 but kept for subsequent analysis
+NOTE: MT919778 is identical to MT919776 but kept for subsequent analysis
+NOTE: MT919789 is identical to MT919788 but kept for subsequent analysis
+NOTE: 11 identical sequences (see below) will be ignored for subsequent analysis
+NOTE: UnitedArabEmirates/L2004034680/2020 (identical to India/KA-CS1029/2020) is ignored but added at the end
+NOTE: Morocco/refstage1/2020 (identical to India/KA-CS1029/2020) is ignored but added at the end
+NOTE: SouthAfrica/KRISP-0115/2020 (identical to India/KA-CS1029/2020) is ignored but added at the end
+NOTE: Tunisia/2909/2020 (identical to India/KA-CS1029/2020) is ignored but added at the end
+NOTE: Uganda/UG048/2020 (identical to India/KA-CS1029/2020) is ignored but added at the end
+NOTE: SaudiArabia/KAUST-JEDDAH922/2020 (identical to SaudiArabia/KAUST-JEDDAH886/2020) is ignored but added at the end
+NOTE: Georgia/MM001597/2020 (identical to SaudiArabia/KAUST-JEDDAH886/2020) is ignored but added at the end
+NOTE: SierraLeone/KGH-G-8549/2020 (identical to SaudiArabia/KAUST-JEDDAH886/2020) is ignored but added at the end
+NOTE: Botswana/BOT0455/2020 (identical to Taiwan/TSGH-23/2020) is ignored but added at the end
+NOTE: SouthKorea/KCDC03/2020 (identical to Japan/PG-1251/2020) is ignored but added at the end
+NOTE: Gambia/GC19-3165/2020 (identical to Gambia/GC19-3792/2020) is ignored but added at the end
+Alignment was printed to GlobalNCR_aligned_trimmed_out.uniqueseq.phy
+
+For your convenience alignment with unique sequences printed to GlobalNCR_aligned_trimmed_out.uniqueseq.phy
+
+Creating fast initial parsimony tree by random order stepwise addition...
+3.753 seconds, parsimony score: 1887 (based on 1521 sites)
+Measuring multi-threading efficiency up to 12 CPU cores
+Increase to 10 rounds for branch lengths
+4 trees examined
+Threads: 1 / Time: 18.518 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -78030
+Threads: 2 / Time: 10.112 sec / Speedup: 1.831 / Efficiency: 92% / LogL: -78030
+Threads: 3 / Time: 7.306 sec / Speedup: 2.535 / Efficiency: 84% / LogL: -78030
+Threads: 4 / Time: 5.313 sec / Speedup: 3.485 / Efficiency: 87% / LogL: -78030
+Threads: 5 / Time: 5.076 sec / Speedup: 3.648 / Efficiency: 73% / LogL: -78030
+Threads: 6 / Time: 4.098 sec / Speedup: 4.518 / Efficiency: 75% / LogL: -78030
+Threads: 7 / Time: 5.362 sec / Speedup: 3.454 / Efficiency: 49% / LogL: -78030
+BEST NUMBER OF THREADS: 6
+
+Perform fast likelihood tree search using GTR+I+G model...
+Estimate model parameters (epsilon = 5.000)
+Perform nearest neighbor interchange...
+Estimate model parameters (epsilon = 1.000)
+1. Initial log-likelihood: -59188.483
+Optimal log-likelihood: -59188.269
+Rate parameters:  A-C: 0.15505  A-G: 0.72000  A-T: 0.14755  C-G: 0.12663  C-T: 2.53877  G-T: 1.00000
+Base frequencies:  A: 0.299  C: 0.184  G: 0.196  T: 0.322
+Proportion of invariable sites: 0.477
+Gamma shape alpha: 0.300
+Parameters optimization took 1 rounds (2.918 sec)
+Time for fast ML tree search: 28.394 seconds
+
+NOTE: ModelFinder requires 781 MB RAM!
+ModelFinder will test up to 286 DNA models (sample size: 29891) ...
+ No. Model         -LnL         df  AIC          AICc         BIC
+  1  GTR+F         59568.961    1159 121455.922   121549.510   131081.780
+  2  GTR+F+I       59204.953    1160 120729.907   120823.660   130364.070
+  3  GTR+F+G4      59227.773    1160 120775.545   120869.298   130409.708
+  4  GTR+F+I+G4    59188.015    1161 120698.030   120791.947   130340.498
+  5  GTR+F+R2      59113.016    1161 120548.032   120641.950   130190.500
+  6  GTR+F+R3      59107.742    1163 120541.483   120635.731   130200.562
+ 18  SYM+R2        60199.082    1158 122714.163   122807.587   132331.715
+ 31  TVM+F+R2      59295.348    1160 120910.697   121004.449   130544.859
+ 44  TVMe+R2       60393.880    1157 123101.760   123195.019   132711.007
+ 57  TIM3+F+R2     59278.262    1159 120874.524   120968.112   130500.381
+ 70  TIM3e+R2      60324.776    1156 122961.553   123054.647   132562.494
+ 83  TIM2+F+R2     59225.760    1159 120769.521   120863.109   130395.378
+ 96  TIM2e+R2      60383.157    1156 123078.313   123171.408   132679.255
+109  TIM+F+R2      59239.439    1159 120796.878   120890.466   130422.735
+122  TIMe+R2       60364.641    1156 123041.283   123134.377   132642.224
+135  TPM3u+F+R2    59467.539    1158 121251.078   121344.501   130868.630
+148  TPM3+F+R2     59467.539    1158 121251.078   121344.501   130868.630
+161  TPM2u+F+R2    59421.512    1158 121159.023   121252.447   130776.575
+174  TPM2+F+R2     59421.512    1158 121159.023   121252.447   130776.575
+187  K3Pu+F+R2     59440.777    1158 121197.554   121290.978   130815.106
+200  K3P+R2        60568.516    1155 123447.031   123539.962   133039.667
+213  TN+F+R2       59353.842    1158 121023.685   121117.108   130641.237
+226  TNe+R2        60469.243    1155 123248.486   123341.416   132841.122
+239  HKY+F+R2      59554.562    1157 121423.125   121516.384   131032.371
+252  K2P+R2        60673.151    1154 123654.302   123747.068   133238.633
+265  F81+F+R2      60075.064    1156 122462.127   122555.222   132063.069
+278  JC+R2         61181.666    1153 124669.331   124761.934   134245.357
+Akaike Information Criterion:           GTR+F+R3
+Corrected Akaike Information Criterion: GTR+F+R3
+Bayesian Information Criterion:         GTR+F+R2
+Best-fit model: GTR+F+R2 chosen according to BIC
+
+All model information printed to GlobalNCR_aligned_trimmed_out.model.gz
+CPU time for ModelFinder: 5688.341 seconds (1h:34m:48s)
+Wall-clock time for ModelFinder: 992.520 seconds (0h:16m:32s)
+Generating 1000 samples for ultrafast bootstrap (seed: 655064)...
+
+NOTE: 168 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -59113.016
+2. Current log-likelihood: -59112.578
+3. Current log-likelihood: -59112.199
+4. Current log-likelihood: -59111.874
+5. Current log-likelihood: -59111.597
+6. Current log-likelihood: -59111.364
+7. Current log-likelihood: -59111.168
+8. Current log-likelihood: -59111.006
+9. Current log-likelihood: -59110.872
+10. Current log-likelihood: -59110.762
+Optimal log-likelihood: -59110.673
+Rate parameters:  A-C: 0.15502  A-G: 0.70582  A-T: 0.14753  C-G: 0.12577  C-T: 2.57758  G-T: 1.00000
+Base frequencies:  A: 0.299  C: 0.184  G: 0.196  T: 0.322
+Site proportion and rates:  (0.982,0.651) (0.018,19.697)
+Parameters optimization took 10 rounds (17.604 sec)
+Computing ML distances based on estimated model parameters...
+Computing ML distances took 1.081342 sec (of wall-clock time) 6.455206 sec(of CPU time)
+Computing RapidNJ tree took 0.062401 sec (of wall-clock time) 0.410727 sec (of CPU time)
+Log-likelihood of RapidNJ tree: -59154.623
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 14.042 second
+Computing log-likelihood of 98 initial trees ... 15.357 seconds
+Current best score: -59066.117
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -59047.482
+Iteration 10 / LogL: -59085.569 / Time: 0h:4m:49s
+Iteration 20 / LogL: -59079.949 / Time: 0h:7m:22s
+Finish initializing candidate tree set (20)
+Current best tree score: -59047.482 / CPU time: 318.929
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Iteration 30 / LogL: -59080.709 / Time: 0h:8m:18s (0h:20m:21s left)
+Iteration 40 / LogL: -59077.207 / Time: 0h:9m:7s (0h:14m:16s left)
+Iteration 50 / LogL: -59090.698 / Time: 0h:10m:5s (0h:10m:30s left)
+Log-likelihood cutoff on original alignment: -59141.117
+Iteration 60 / LogL: -59109.483 / Time: 0h:11m:19s (0h:7m:52s left)
+Iteration 70 / LogL: -59087.060 / Time: 0h:12m:21s (0h:5m:33s left)
+Iteration 80 / LogL: -59071.229 / Time: 0h:13m:31s (0h:3m:35s left)
+NOTE: 14.311 seconds to dump checkpoint file, increase to 287.000
+Iteration 90 / LogL: -59130.150 / Time: 0h:14m:59s (0h:1m:51s left)
+Iteration 100 / LogL: -59099.041 / Time: 0h:16m:0s (0h:0m:9s left)
+Log-likelihood cutoff on original alignment: -59141.117
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.999
+TREE SEARCH COMPLETED AFTER 102 ITERATIONS / Time: 0h:16m:18s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -59047.482
+2. Current log-likelihood: -59047.441
+Optimal log-likelihood: -59047.439
+Rate parameters:  A-C: 0.15754  A-G: 0.68939  A-T: 0.14879  C-G: 0.12575  C-T: 2.56213  G-T: 1.00000
+Base frequencies:  A: 0.299  C: 0.184  G: 0.196  T: 0.322
+Site proportion and rates:  (0.984,0.670) (0.016,20.833)
+Parameters optimization took 2 rounds (3.984 sec)
+BEST SCORE FOUND : -59047.439
+
+Testing tree branches by SH-like aLRT with 1000 replicates...
+43.484 sec.
+Creating bootstrap support values...
+Split supports printed to NEXUS file GlobalNCR_aligned_trimmed_out.splits.nex
+Total tree length: 0.064
+
+Total number of iterations: 102
+CPU time used for tree search: 4816.899 sec (1h:20m:16s)
+Wall-clock time used for tree search: 854.995 sec (0h:14m:14s)
+Total CPU time used: 5222.644 sec (1h:27m:2s)
+Total wall-clock time used: 2242.520 sec (0h:37m:22s)
+
+Computing bootstrap consensus tree...
+Reading input file GlobalNCR_aligned_trimmed_out.splits.nex...
+577 taxa and 13544 splits.
+Consensus tree written to GlobalNCR_aligned_trimmed_out.contree
+Reading input trees file GlobalNCR_aligned_trimmed_out.contree
+Log-likelihood of consensus tree: -59051.642
+
+Analysis results written to: 
+  IQ-TREE report:                GlobalNCR_aligned_trimmed_out.iqtree
+  Maximum-likelihood tree:       GlobalNCR_aligned_trimmed_out.treefile
+  Likelihood distances:          GlobalNCR_aligned_trimmed_out.mldist
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          GlobalNCR_aligned_trimmed_out.splits.nex
+  Consensus tree:                GlobalNCR_aligned_trimmed_out.contree
+  Screen log file:               GlobalNCR_aligned_trimmed_out.log
+
+Date and Time: Tue Mar 14 17:34:55 2023
